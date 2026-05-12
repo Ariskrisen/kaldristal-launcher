@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "minecraft_version": "1.20.1",
   "modloader": "forge",
-  "modloader_version": "47.3.0",
-  "base_url": "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/modpack/",
+  "modloader_version": "47.4.0",
+  "base_url": "https://github.com/Ariskrisen/kaldristal-launcher/main/",
   "files": [
     {
       "path": "config/accessories.json5",
@@ -6821,7 +6821,7 @@
       "size": 40563
     },
     {
-      "path": "mods/Simply_Create_Model｜简单动力-mod-1.20.1-1.0.1.jar",
+      "path": "mods/Simply_Create_Modelï½ç®åå¨å-mod-1.20.1-1.0.1.jar",
       "sha256": "3ed30fe353bb94df8c21d4a659175f8e15a992479bfe84461c7052f1b743d78a",
       "size": 1298614
     },
@@ -7666,7 +7666,7 @@
       "size": 762
     },
     {
-      "path": "resourcepacks/Анимации игрока без глаз.zip",
+      "path": "resourcepacks/ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ð¸ Ð¸Ð³ÑÐ¾ÐºÐ° Ð±ÐµÐ· Ð³Ð»Ð°Ð·.zip",
       "sha256": "71763eef0ca9bb67e675175ea6a19923f7f501239b3945cf7d90a3703dece964",
       "size": 250762
     },
