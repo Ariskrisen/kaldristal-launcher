@@ -1,0 +1,19 @@
+{
+    "name": "Ледочрев",
+    "icon": "mowziesmobs:ice_crystal",
+    "sortnum": 1,
+    "category": "patchouli:boss_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Этот Босс довольно лёгкий и не очень сложный. Если знать его атаки и держаться на дистанции, то можно спокойно его одолеть! А кстати, с него падает $(l:patchouli:world/end)$(#FB2929)Ледяное око$() которое надо для портала в энд!"
+        },
+        {
+            "type": "entity",
+            "name": "Ледочрев",
+            "text": "Этот босс встречается в ледяных биомах спящим на поверхности.",
+            "entity": "mowziesmobs:frostmaw",
+            "scale": "0.6"
+        }
+    ]
+}

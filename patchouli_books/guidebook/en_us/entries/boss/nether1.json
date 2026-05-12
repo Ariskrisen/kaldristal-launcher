@@ -1,0 +1,25 @@
+{
+    "name": "Незер Чудище",
+    "icon": "cataclysm:infernal_forge",
+    "sortnum": 6,
+    "category": "patchouli:boss_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Для того чтобы найти данного босса, нужно скрафтить $(#BE8A3B)Чудовищное око$() которое покажет вам путь в его данж! Этот босс имеет при низком хп агрессивность и может напасть по полу!"
+        },
+        {
+            "type": "crafting",
+            "title": "Рецепт Ока бездны",
+            "text": "Этот рецепт покажет вам путь на арену с данным боссом. Узнать о боссе можно в следующей странице.",
+            "recipe": "cataclysm:monstrous_eye"
+        },
+        {
+            "type": "entity",
+            "name": "Незер Чудище",
+            "text": "Данный босс находится в аду.",
+            "entity": "cataclysm:netherite_monstrosity",
+            "scale": "0.8"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Зонт",
+    "icon": "artifacts:umbrella",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Зонт? Серьёзно? Ну ладно.. Давайте посмотрим его плюсы: Он красивый, хорошо держится в руке, у него цвет красное и белое, и всё?.."
+        },
+        {
+            "type": "spotlight",
+            "title": "Зонт",
+            "text": "Замедляет ваше падение при удержании. Так-же можно использовать как щит.",
+            "item": "artifacts:umbrella"
+        }
+    ]
+}

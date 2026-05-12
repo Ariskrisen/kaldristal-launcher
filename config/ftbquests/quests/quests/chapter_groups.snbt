@@ -1,0 +1,9 @@
+{
+	chapter_groups: [
+		{ id: "24431910BCDF246B", title: "&6I&r: Готовка" }
+		{ id: "7A6FEFAE00EAC5F4", title: "&6II&r: Миры" }
+		{ id: "1098D066E0B91DCA", title: "&6III&r: Классы" }
+		{ id: "77B836E2F372761C", title: "&6IV&r: Магия" }
+		{ id: "5EB751CA5EA0FA30", title: "&6V&r: Приключения" }
+	]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Золотой крюк",
+    "icon": "artifacts:golden_hook",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Кажется, данный крюк выпал с какого-то пирата когда они иследовали шахты, хм, возможно данный предмет поможет в использовании опыта!"
+        },
+        {
+            "type": "spotlight",
+            "title": "Золотой крюк",
+            "text": "Данный крюк может давать больше опыта при убийстве существ.",
+            "item": "artifacts:golden_hook"
+        }
+    ]
+}

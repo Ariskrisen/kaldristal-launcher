@@ -1,0 +1,20 @@
+{
+    "name": "Нага",
+    "icon": "twilightforest:naga_trophy",
+    "sortnum": 0,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Это первый босс из сумеречного леса, данный босс открывает возможность к убийству следующего босса по этапно. С неё дропается очень редкий предмет который нужен для $(l:patchouli:world/end)$(#9771F3)портала в энд$()."
+        },
+        {
+            "type": "entity",
+            "name": "Нага",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:naga",
+            "scale": "1",
+            "offset": "0.5"
+        }
+    ]
+}

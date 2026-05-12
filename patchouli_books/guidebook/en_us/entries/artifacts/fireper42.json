@@ -1,0 +1,17 @@
+{
+    "name": "Нагреватель кирки",
+    "icon": "artifacts:pickaxe_heater",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Ого! Данная перчатка может быть очень полезной в шахте. Она такая горячая что ей можно плавить руды сразу! Очень интересно..."
+        },
+        {
+            "type": "spotlight",
+            "title": "Нагреватель кирки",
+            "text": "Автоматически переплавляет добытую вами руду.",
+            "item": "artifacts:pickaxe_heater"
+        }
+    ]
+}

@@ -1,0 +1,802 @@
+{
+	autofocus_id: "196681795690815F"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "d34r_l"
+	group: "1098D066E0B91DCA"
+	icon: {
+		Count: 1
+		id: "minecells:assassins_dagger"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "2EB1C721C34466B1"
+	images: [
+		{
+			height: 2.0d
+			image: "archers:item/netherite_rapid_crossbow_pulling_0"
+			rotation: 0.0d
+			width: 2.0d
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:item/crossbow_firework"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.5d
+			y: 1.0d
+		}
+		{
+			height: 1.0d
+			image: "alexscaves:item/desolate_dagger"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: 1.0d
+		}
+		{
+			height: 1.0d
+			image: "cataclysm:item/black_steel_sword"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/assassin_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.0d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/assassin_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: -6.976190476190489d
+			y: -0.2142857142857153d
+		}
+		{
+			height: 4.8d
+			image: "rogues:item/assassin_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 4.0d
+			x: -7.114285714285693d
+			y: 1.642857142857153d
+		}
+		{
+			height: 3.0d
+			image: "rogues:item/diamond_dagger"
+			order: -2
+			rotation: 90.0d
+			width: 3.0d
+			x: -8.0d
+			y: -1.5d
+		}
+		{
+			height: 3.0d
+			image: "rogues:item/diamond_dagger"
+			order: -2
+			rotation: -180.0d
+			width: 3.0d
+			x: -6.0d
+			y: -1.5d
+		}
+		{
+			height: 5.0d
+			image: "archers:item/archer_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.5d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "archers:item/archer_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.61904761904762d
+			y: -0.3095238095238173d
+		}
+		{
+			height: 5.0d
+			image: "archers:item/archer_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 4.0d
+			x: 7.5d
+			y: 1.5d
+		}
+		{
+			height: 4.0d
+			image: "archers:item/netherite_rapid_crossbow_pulling_0"
+			order: -3
+			rotation: 90.0d
+			width: 4.0d
+			x: 9.0d
+			y: -1.5d
+		}
+	]
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["&5Авантюрист&f подразделяется на 3 подкласса, которые используют похожее снаряжение, состоящее из лёгкого парного и дальнобойного оружия. Этими подклассами являются: &2Лучник&f, &8Наёмник&f и &4Ассасин&f."]
+			id: "196681795690815F"
+			rewards: [{
+				id: "1770F87EF8B07D43"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "hexagon"
+			tasks: [{
+				id: "1258A18C46DF6276"
+				type: "checkmark"
+			}]
+			title: "Начало пути авантюриста"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Специализируется на нанесении урона из-за спины и ослаблении противника."]
+			id: "765C5C1999B7B8A3"
+			rewards: [{
+				id: "5F27601D32826436"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "1DCC57CC5C5CE7EB"
+				type: "checkmark"
+			}]
+			title: "&8Наёмник"
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Куда же авантюристу без подходящей экипировки?"]
+			id: "4D82F34619903904"
+			rewards: [{
+				id: "17A04C6BFF689A3A"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "2966DCE2D32168F1"
+				type: "checkmark"
+			}]
+			title: "Броня"
+			x: -2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Некоторые виды оружия на эти классы уже есть в других ветках квестов, таких как: &5Боссы&f, &5Сумеречный лес&f, &5Забытые катакомбы&f."]
+			id: "38968BB7A8597B6C"
+			rewards: [{
+				id: "668B74B97B265418"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "599DE6BD9B6F89C4"
+				type: "checkmark"
+			}]
+			title: "Оружие"
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Специализируется на дальнобойном оружии, сильно не подставляясь под удары противников."]
+			id: "705D4EB5907CF57B"
+			rewards: [{
+				id: "5AE32E1CE65EA8AC"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "1B906EE2DB70FC5E"
+				type: "checkmark"
+			}]
+			title: "&2Лучник"
+			x: -2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Специализируется на скрытности и отравлении противника из-за спины."]
+			id: "5D8DE8124C9A0279"
+			rewards: [{
+				id: "5E9900E06500228F"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "7977ABBB8A11C16E"
+				type: "checkmark"
+			}]
+			title: "&4Ассасин"
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню охотника - лучшую экипировку на лучника на данный момент."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "archers:ranger_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "37F0B16353B67DAA"
+			rewards: [{
+				id: "5C3C5FFA93437E58"
+				type: "xp"
+				xp: 750
+			}]
+			tasks: [
+				{
+					id: "2B2C45B980A218C4"
+					item: {
+						Count: 1
+						id: "archers:ranger_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "7936F57A60F540C4"
+					item: {
+						Count: 1
+						id: "archers:ranger_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня охотника"
+			x: -3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню охотника - лучшую экипировку на лучника на данный момент."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "archers:ranger_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "2025C2F0CA8745D5"
+			rewards: [{
+				id: "3C869451798B0D3F"
+				type: "xp"
+				xp: 750
+			}]
+			tasks: [
+				{
+					id: "3884B8C4B9F92578"
+					item: {
+						Count: 1
+						id: "archers:ranger_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "3771C3934D36A149"
+					item: {
+						Count: 1
+						id: "archers:ranger_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня охотника"
+			x: -3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "archers:archer_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "01C8E3AEB9C5B7C7"
+			rewards: [{
+				id: "378402CEACA57679"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [
+				{
+					id: "301231D5C71D1E79"
+					item: {
+						Count: 1
+						id: "archers:archer_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "4C22C29C2E021172"
+					item: {
+						Count: 1
+						id: "archers:archer_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня лучника"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "archers:archer_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "0BA0AF9F3EBA6CF2"
+			rewards: [{
+				id: "09FD1EE10B4F45C0"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [
+				{
+					id: "1D8D62D2CFE023A3"
+					item: {
+						Count: 1
+						id: "archers:archer_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "3B63BBAF6D2D03DD"
+					item: {
+						Count: 1
+						id: "archers:archer_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня лучника"
+			x: 3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню ассасина, ускоряющую носителя и увеличивающую его урон."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:assassin_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "0ACAA2849AE3F1B4"
+			rewards: [{
+				id: "10A381B9AAF168F3"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [
+				{
+					id: "2C3DEB9D6BD657C5"
+					item: {
+						Count: 1
+						id: "rogues:assassin_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "0141B6DF27A56C20"
+					item: {
+						Count: 1
+						id: "rogues:assassin_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня ассасина"
+			x: -3.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню ассасина, ускоряющую носителя и увеличивающую его урон."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:assassin_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "5462BB9A66815A51"
+			rewards: [{
+				id: "643DD8AD83007FE1"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [
+				{
+					id: "6A875544C09FDCEE"
+					item: {
+						Count: 1
+						id: "rogues:assassin_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "59260D1165FFFFF6"
+					item: {
+						Count: 1
+						id: "rogues:assassin_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня ассасина"
+			x: 3.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню разбойника, ускоряющую атаки и передвижение носителя."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:rogue_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "1DEC0B1FFE8A32DF"
+			rewards: [{
+				id: "717CA6B684D4511B"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [
+				{
+					id: "3F83BD1063ED0D26"
+					item: {
+						Count: 1
+						id: "rogues:rogue_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "490695627402E1A9"
+					item: {
+						Count: 1
+						id: "rogues:rogue_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня разбойника"
+			x: -1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["4D82F34619903904"]
+			description: ["Создайте броню разбойника, ускоряющую атаки и передвижение носителя."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:rogue_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "57BC975E91A78FBA"
+			rewards: [{
+				id: "70132EDC8895A77F"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [
+				{
+					id: "12D1C1E2AF7C50A8"
+					item: {
+						Count: 1
+						id: "rogues:rogue_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "0EAB3D257AF14F6B"
+					item: {
+						Count: 1
+						id: "rogues:rogue_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня разбойника"
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте алмазный кинжал."]
+			hide_dependency_lines: true
+			id: "4DF56C240FCFF6D7"
+			rewards: [{
+				id: "4D6D32D7C06CF451"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [{
+				id: "71341F163C011547"
+				item: {
+					Count: 1
+					id: "rogues:diamond_dagger"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте алмазный серп."]
+			hide_dependency_lines: true
+			id: "572450F48F552C32"
+			rewards: [{
+				id: "4128D5A33AE0712D"
+				type: "xp"
+				xp: 250
+			}]
+			tasks: [{
+				id: "69541269AAF3968E"
+				item: {
+					Count: 1
+					id: "rogues:diamond_sickle"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -1.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте незеритовый короткий лук."]
+			hide_dependency_lines: true
+			id: "65FD7F8A72F8FA29"
+			rewards: [{
+				id: "63A875BD6A471A2E"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "6233A54FDD5E5B1E"
+				item: {
+					Count: 1
+					id: "archers:netherite_shortbow"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте незеритовый длинный лук."]
+			hide_dependency_lines: true
+			id: "1934CC3E6A1FD873"
+			rewards: [{
+				id: "4D4C6B54AE2F9821"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "10217EF24F9A5AA4"
+				item: {
+					Count: 1
+					id: "archers:netherite_longbow"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 2.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте незеритовый скоростной арбалет."]
+			hide_dependency_lines: true
+			id: "1CC41918BDBA6B3C"
+			rewards: [{
+				id: "67D655370F869B61"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "78AF6901851A72F8"
+				item: {
+					Count: 1
+					id: "archers:netherite_rapid_crossbow"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте незеритовый тяжёлый арбалет."]
+			hide_dependency_lines: true
+			id: "5946BA80E86D7008"
+			rewards: [{
+				id: "3D88FCE8D92A0142"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "7BA5B0BC6AE449F3"
+				item: {
+					Count: 1
+					id: "archers:netherite_heavy_crossbow"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 2.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["4DF56C240FCFF6D7"]
+			description: ["Создайте незеритовый кинжал."]
+			id: "631E4F9A95928C7B"
+			rewards: [{
+				id: "20C89B6DFEBBB195"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "3178F362745A9C90"
+				item: {
+					Count: 1
+					id: "rogues:netherite_dagger"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["572450F48F552C32"]
+			description: ["Создайте незеритовый серп."]
+			id: "25338D46A0488BC0"
+			rewards: [{
+				id: "3419DC024A85C278"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [{
+				id: "7397CC5A60BF706B"
+				item: {
+					Count: 1
+					id: "rogues:netherite_sickle"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -1.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["196681795690815F"]
+			description: ["Создайте модуль автострельбы для установки на дальнобойное оружие."]
+			id: "3D99E229882468A0"
+			rewards: [{
+				id: "121CA3B84AF5B848"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "79F43D6AD8FF4A7C"
+				item: "archers:auto_fire_hook"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 2.0d
+		}
+	]
+	title: "&d3.4&r: &lАвантюрист"
+}

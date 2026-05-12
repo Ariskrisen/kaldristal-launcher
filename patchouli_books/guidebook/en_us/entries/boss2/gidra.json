@@ -1,0 +1,19 @@
+{
+    "name": "Гидра",
+    "icon": "twilightforest:hydra_trophy",
+    "sortnum": 3,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Гидра - это тяжёлый босс $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречного леса$(). Чтобы его убить надо наносить урон по активной голове. Это как? Когда голова Гидры начинает выпускать пламя из своей головы, её нужно начинать бить."
+        },
+        {
+            "type": "entity",
+            "name": "Гидра",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:hydra",
+            "scale": "1"
+        }
+    ]
+}

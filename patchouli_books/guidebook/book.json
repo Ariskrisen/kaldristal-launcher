@@ -1,0 +1,14 @@
+{
+    "name": "Потерянные знания",
+    "landing_text": "Привет $(playername), добро пожаловать на сборку LostSouls! Этот гайдбук поможет с контентом в этой вселенной, сейчас проводим тебя в мир интересностей!",
+    "model": "patchouli:book_purple",
+    "book_texture": "patchouli:textures/gui/book_gray.png",
+    "use_blocky_font": true,
+    "link_color": "CF37EC",
+    "text_overflow_mode": "resize",
+    "progress_bar_color": "FFCD68",
+    "progress_bar_background": "D8A434",
+    "version": 1,
+    "creative_tab": "minecraft:ingredients",
+    "use_resource_pack": false
+}

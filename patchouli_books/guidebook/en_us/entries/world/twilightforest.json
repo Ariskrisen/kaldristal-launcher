@@ -1,0 +1,20 @@
+{
+    "name": "Портал в сум.лес",
+    "icon": "twilightforest:twilight_portal_miniature_structure",
+    "category": "patchouli:world_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Этот загадочный мир настолько загадочный, что туда можно попасть обложив территорию 2x2, залив туда водой и... Бросить алмаз? Серьёзно? Кто додумался!?"
+        },
+        {
+            "type": "image",
+            "text": "",
+            "title": "",
+            "border": true,
+            "images": [
+                "patchouli:twilight_portal.png"
+            ]
+        }
+    ]
+}

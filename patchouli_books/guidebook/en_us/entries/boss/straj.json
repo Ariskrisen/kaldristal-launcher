@@ -1,0 +1,25 @@
+{
+    "name": "Страж Края",
+    "icon": "cataclysm:void_core",
+    "sortnum": 10,
+    "category": "patchouli:boss_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Для того чтобы найти данного босса, нужно скрафтить $(#9065E5)Око Пустоты$(). Этот босс находится в комнате под данным городом."
+        },
+        {
+            "type": "crafting",
+            "title": "Око Пустоты",
+            "text": "Данное око покажет вам где находится арена Стража Края",
+            "recipe": "cataclysm:void_eye"
+        },
+        {
+            "type": "entity",
+            "name": "Предвестник",
+            "text": "Данный босс находится в эндр мире в городе.",
+            "entity": "cataclysm:ender_guardian",
+            "scale": "0.8"
+        }
+    ]
+}

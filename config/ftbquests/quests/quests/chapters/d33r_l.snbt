@@ -1,0 +1,595 @@
+{
+	autofocus_id: "6B84CEBECC9F0797"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "d33r_l"
+	group: "1098D066E0B91DCA"
+	icon: {
+		Count: 1
+		id: "twilightforest:knightmetal_shield"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "02FF41AA02B72CBC"
+	images: [
+		{
+			height: 2.0d
+			image: "minecells:item/shield/greed_shield"
+			rotation: 0.0d
+			width: 2.0d
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "eidolon:textures/mob_effect/light_blessing.png"
+			rotation: 0.0d
+			width: 1.0d
+			x: -0.5d
+			y: -2.5d
+		}
+		{
+			height: 1.0d
+			image: "luckys_armory:item/heavy_iron_helmet_open"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: 1.0d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:item/iron_chestplate"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			height: 5.0d
+			image: "paladins:item/paladin_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.5d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "paladins:item/paladin_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.238095238095241d
+			y: -0.7380952380952337d
+		}
+		{
+			height: 4.8d
+			image: "paladins:item/paladin_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 4.8d
+			x: -7.35d
+			y: 1.5d
+		}
+		{
+			height: 5.0d
+			image: "ftblibrary:icons/shield"
+			order: 3
+			rotation: 0.0d
+			width: 5.0d
+			x: 5.5d
+			y: 0.0d
+		}
+		{
+			height: 5.0d
+			image: "minecells:item/shield/cudgel"
+			order: 3
+			rotation: 0.0d
+			width: 5.0d
+			x: -9.5d
+			y: 0.0d
+		}
+		{
+			height: 5.0d
+			image: "paladins:item/crusader_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.5d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "paladins:item/crusader_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.5d
+			y: -0.5d
+		}
+		{
+			height: 4.8d
+			image: "paladins:item/crusader_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 4.8d
+			x: 7.5d
+			y: 1.5d
+		}
+	]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["&5Щитовик&f подразделяется на 3 подкласса, которые используют похожее снаряжение, состоящее из тяжелой брони, щита и  одноручного оружия. Этими подклассами являются: &6Рыцарь&f, &7Танк&f и &eПаладин&f."]
+			id: "6B84CEBECC9F0797"
+			rewards: [{
+				id: "6AE5259F445F3DC5"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "hexagon"
+			tasks: [{
+				id: "272629D49CEFB503"
+				type: "checkmark"
+			}]
+			title: "Начало пути защиты"
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Специализируется на поддержке союзников с помощью своей огромной защиты и умения использовать магию исцеления."]
+			id: "6CD0A6E36CC55A64"
+			rewards: [{
+				id: "010E3934F1F25838"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "4553499DFE84DBA2"
+				type: "checkmark"
+			}]
+			title: "&eПаладин&f"
+			x: -0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Большинство сетов брони на эти классы уже есть в других ветках квестов, таких как: &5Герои былых времён&f, &5Боссы&f, &5Драконы&f."]
+			id: "373D5456ED8809D5"
+			rewards: [{
+				id: "518B0D2107A42FEE"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "48BD633661583E90"
+				type: "checkmark"
+			}]
+			title: "Броня"
+			x: -2.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Лучшие виды оружия на эти классы уже есть в других ветках квестов, таких как: &5Боссы&f, &5Драконы&f, &5Герои былых времён&f."]
+			id: "13485D3B8C8378BE"
+			rewards: [{
+				id: "5BD0E80385F67F8D"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "7F95E8EF0F3FAD6D"
+				type: "checkmark"
+			}]
+			title: "Оружие"
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Специализируется на балансе между собственным уроном и защитой, являясь идеальной боевой единицей отряда."]
+			id: "019CE1B269CBE2B6"
+			rewards: [{
+				id: "322774B41792ABB5"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "2BD9D33D1DF36E00"
+				type: "checkmark"
+			}]
+			title: "&6Рыцарь&f"
+			x: -2.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Специализируется на блокировании огромного количества вражеских атак при помощи щита и тяжёлой брони."]
+			id: "5F06B31DE643BD66"
+			rewards: [{
+				id: "5823869193D45E12"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "13A1E15E791C3F27"
+				type: "checkmark"
+			}]
+			title: "&7Танк&f"
+			x: 1.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["373D5456ED8809D5"]
+			description: ["Создайте броню паладина, повышающую силу священной магии."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "paladins:paladin_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "6AB38AEA086A027D"
+			tasks: [
+				{
+					id: "7E657A2422A251F4"
+					item: {
+						Count: 1
+						id: "paladins:paladin_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "49B12100D12681FF"
+					item: {
+						Count: 1
+						id: "paladins:paladin_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня паладина"
+			x: -3.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["373D5456ED8809D5"]
+			description: ["Создайте броню паладина, повышающую силу священной магии."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "paladins:paladin_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "7239CD325CB99E53"
+			tasks: [
+				{
+					id: "23AB0B1735AF92C0"
+					item: {
+						Count: 1
+						id: "paladins:paladin_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "18F7122DFA2E540A"
+					item: {
+						Count: 1
+						id: "paladins:paladin_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня паладина"
+			x: -4.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["373D5456ED8809D5"]
+			description: ["Создайте броню крестоносца, повышающую силу священной магии до предела."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "paladins:crusader_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "25B0FD2F0D1FDA66"
+			tasks: [
+				{
+					id: "4CD335F44FD539AB"
+					item: {
+						Count: 1
+						id: "paladins:crusader_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "349983F05ACAF43F"
+					item: {
+						Count: 1
+						id: "paladins:crusader_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня крестоносца"
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["373D5456ED8809D5"]
+			description: ["Создайте броню крестоносца, повышающую силу священной магии до предела."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "paladins:crusader_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "22918D81D3B488F6"
+			tasks: [
+				{
+					id: "5C5FD3FE398AC6E4"
+					item: {
+						Count: 1
+						id: "paladins:crusader_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "4B1ADD7D6B926BEE"
+					item: {
+						Count: 1
+						id: "paladins:crusader_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня крестоносца"
+			x: 3.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Создайте алмазную булаву."]
+			hide_dependency_lines: true
+			id: "2F101B265D3D40F7"
+			tasks: [{
+				id: "27E7BDBDE141EB5A"
+				item: {
+					Count: 1
+					id: "paladins:diamond_mace"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Создайте алмазный щит."]
+			hide_dependency_lines: true
+			id: "434A757D417785DB"
+			tasks: [{
+				id: "1979AE55D388911E"
+				item: {
+					Count: 1
+					id: "paladins:diamond_kite_shield"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["6B84CEBECC9F0797"]
+			description: ["Создайте тяжёлую алмазную броню."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "luckys_armory:heavy_diamond_armor_helmet"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "195563C4C8DD317E"
+			rewards: [{
+				id: "2DBC393575607741"
+				type: "xp"
+				xp: 750
+			}]
+			tasks: [
+				{
+					id: "0E60910F1E512E01"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_diamond_armor_helmet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "67E32398BB661F3F"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_diamond_armor_chestplate"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "3BE7CC33336A4985"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_diamond_armor_leggings"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "235FB40FB382551E"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_diamond_armor_boots"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Тяжёлая алмазная броня"
+			x: 1.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["2F101B265D3D40F7"]
+			description: ["Создайте незеритовую булаву."]
+			id: "4390D6C26B46BFBA"
+			tasks: [{
+				id: "2DB8B53CE66030B7"
+				item: {
+					Count: 1
+					id: "paladins:netherite_mace"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["434A757D417785DB"]
+			description: ["Создайте незеритовый щит."]
+			id: "5579DD4C15C1E1F9"
+			tasks: [{
+				id: "608272C39E7D3553"
+				item: {
+					Count: 1
+					id: "paladins:netherite_kite_shield"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["195563C4C8DD317E"]
+			description: ["Создайте тяжёлую незеритовую броню."]
+			icon: {
+				Count: 1
+				id: "luckys_armory:heavy_netherite_armor_helmet"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "26A1D3BD2B678CD8"
+			rewards: [{
+				id: "01E780E7AA52793C"
+				type: "xp"
+				xp: 1000
+			}]
+			tasks: [
+				{
+					id: "19B9245B12B753DC"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_netherite_armor_helmet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "510C92BF40E88EAA"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_netherite_armor_chestplate"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "5F4FAD761C900CCC"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_netherite_armor_leggings"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6C97DD3E7998DD1B"
+					item: {
+						Count: 1
+						id: "luckys_armory:heavy_netherite_armor_boots"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Тяжёлая незеритовая броня"
+			x: 1.0d
+			y: 4.5d
+		}
+	]
+	title: "&d3.3&r: &lЩитовик"
+}

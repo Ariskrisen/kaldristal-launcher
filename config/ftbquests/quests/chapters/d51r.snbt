@@ -1,0 +1,284 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "d51r"
+	group: "5EB751CA5EA0FA30"
+	icon: "domesticationinnovation:pet_bed_red"
+	id: "193B07A4E1CBF1EB"
+	images: [
+		{
+			height: 1.0d
+			image: "relics:item/wool_mitten"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "relics:item/magma_walker_fire"
+			rotation: 180.0d
+			width: 1.0d
+			x: 0.5d
+			y: 3.0d
+		}
+		{
+			height: 1.0d
+			image: "relics:item/magma_walker_fire"
+			rotation: 180.0d
+			width: 1.0d
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:item/feather"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "aether:item/accessories/golden_feather"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "endrem:item/magical_eye"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.5d
+			y: -3.0d
+		}
+		{
+			height: 1.0d
+			image: "geckolib:item/wolf_armor_helmet"
+			rotation: -30.0d
+			width: 1.0d
+			x: 0.5d
+			y: 2.0d
+		}
+		{
+			height: 1.0d
+			image: "crittersandcompanions:item/silk"
+			rotation: 0.0d
+			width: 1.0d
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "crittersandcompanions:item/pearl_necklace"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.0d
+			y: 1.0d
+		}
+	]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["&6Пёрышко на палке&r может пригодится тогда, когда вы ведёте своего питомца куда-либо. Для них это словно... Игрушка?"]
+			id: "1F4CE37DA0533A7C"
+			rewards: [{
+				id: "1EFDF63FFCF1E691"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "57B7CAB941995F75"
+				item: {
+					Count: 1
+					id: "domesticationinnovation:feather_on_a_stick"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			description: ["При помощи &6жетона&r, вы сможете накладывать зачарования на своих питомцев. Найдя чародейскую книгу, обьедините её вместе с жетоном на наковальне, а затем нажмите ПКМ по питомцу. Также жетон работает как бирка, но только на прирученных животных."]
+			id: "68DA39A993C36346"
+			rewards: [
+				{
+					id: "54B79348B9F78A42"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "5969AFABC31F1316"
+					item: "domesticationinnovation:deed_of_ownership"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [{
+				id: "47B2D5B699691A5E"
+				item: "domesticationinnovation:collar_tag"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -2.5d
+		}
+		{
+			description: ["&6Командный барабан&r позволит вам использовать его рядом с большим количеством ваших питомцев, чтобы командовать целым стадом, а не по отдельности использовать команды."]
+			id: "62B7D6070919E167"
+			rewards: [{
+				id: "609E2F45E6BC0371"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "39A262B0EBD5CE8D"
+				item: "domesticationinnovation:drum"
+				type: "item"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			description: ["Вы можете создать для своего любимого питомца &6лежанку&f, с помощью которой он сможет возродиться после смерти."]
+			id: "2243046BA2CE9168"
+			rewards: [{
+				id: "02448E5D1360B8D1"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "5A197289BF713577"
+				item: "domesticationinnovation:pet_bed_white"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 2.5d
+		}
+		{
+			description: ["Выдра нерестится в реках. Выдры будут открывать моллюсков, чтобы найти жемчуг – моллюсков можно добыть, ловя рыбу в реках. Жемчуг используется для создания жемчужного ожерелья!"]
+			id: "162D70271CDB72A7"
+			rewards: [{
+				id: "25F2DA097CEEB9CB"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "754DB4EAF7D70C4B"
+				item: "crittersandcompanions:pearl"
+				type: "item"
+			}]
+			title: "Выдра"
+			x: 0.5d
+			y: 1.0d
+		}
+		{
+			description: ["Появляется на равнинах и в лесах, и его можно приручить с помощью сырого кролика. Прирученные хорьки могут копать добычу после того, как их накормили сырой курицей"]
+			id: "7122A4172C6DB2DF"
+			rewards: [{
+				id: "1039C5CD36869446"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "61388E6F30BF77F1"
+				item: "minecraft:rabbit"
+				type: "item"
+			}]
+			title: "Хорёк"
+			x: 0.5d
+			y: 0.0d
+		}
+		{
+			description: ["Спавнится в глубоких океанах и может быть подобран ведром. Когда игрок тонет, находящиеся поблизости осьминоги-дамбо помогут, дав ему пузырьковый шлем."]
+			id: "06A5545A61528D2B"
+			rewards: [{
+				id: "514AC8061E5ECAB8"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "550E8D78DD049FA8"
+				title: "Осьминог Дамбо"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			description: ["Появляется в океанах и может быть подобран с помощью ведра. Слайм морского кролика можно получить с помощью стеклянных бутылок и использовать для изготовления блоков слайма морского кролика."]
+			id: "0A18E6BC4750B328"
+			rewards: [{
+				id: "70DF27147404BA96"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "37C13C30E5D3966B"
+				item: "crittersandcompanions:sea_bunny_slime_bottle"
+				type: "item"
+			}]
+			title: "Морской кролик"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			description: ["Спавнится в джунглях и спит весь день. Разводится с помощью бамбука и приручается сладкими ягодами. При приручении красные панды будут отпугивать самых агрессивных нейтральных мобов!"]
+			id: "433F9C1E822CF34D"
+			rewards: [{
+				id: "03E4B41274B3C9B7"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "7F5A04AD7F974F23"
+				title: "Красная панда"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			description: ["Приручается с помощью крыльев стрекозы и будет защищать игрока. Из него выпадает прыгающий паучий шелк, который можно использовать для создания шелкового поводка и шелкового крюка-кошки."]
+			id: "366D5C120DA040C4"
+			rewards: [{
+				id: "328E2E5328C10C93"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "1E5AF8E664F261CC"
+				item: "crittersandcompanions:silk"
+				type: "item"
+			}]
+			title: "Паук-скакун"
+			x: 0.5d
+			y: -1.0d
+		}
+		{
+			description: ["Спавнится над реками, может быть приручена с помощью паучьих глаз."]
+			id: "38077871B2932481"
+			rewards: [{
+				id: "2631860F6E34596E"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "61EDEB6B4C96CD7E"
+				item: "crittersandcompanions:dragonfly_wing"
+				type: "item"
+			}]
+			title: "Стрекоза"
+			x: -0.5d
+			y: 0.0d
+		}
+	]
+	title: "&d4.1&r: &lПитомцы"
+}

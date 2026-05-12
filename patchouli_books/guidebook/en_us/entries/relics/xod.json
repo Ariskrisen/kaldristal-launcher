@@ -1,0 +1,17 @@
+{
+    "name": "Лаваходы",
+    "icon": "relics:magma_walker",
+    "category": "patchouli:relics_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Такие горячие и упругие.. Интересно, если они находятся в аду и встречаются только там, они могут ходить по лаве? Или это просто вымысел который мне предоставила жизнь."
+        },
+        {
+            "type": "spotlight",
+            "title": "Лаваходы",
+            "text": "Позволяет владельцу ходить по лаве.",
+            "item": "relics:magma_walker"
+        }
+    ]
+}

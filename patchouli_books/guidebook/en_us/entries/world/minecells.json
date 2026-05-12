@@ -1,0 +1,11 @@
+{
+    "name": "Портал в Minecells",
+    "icon": "minecells:ramparts_doorway",
+    "category": "patchouli:world_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "В мире начали спавниться странные сооружения, похожие из другой вселенной под названием DeadCells, очень интересно что же там хранит, и какие секреты оно таит?"
+        }
+    ]
+}

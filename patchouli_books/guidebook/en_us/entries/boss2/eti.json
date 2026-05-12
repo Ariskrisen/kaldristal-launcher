@@ -1,0 +1,19 @@
+{
+    "name": "Альфа Йети",
+    "icon": "twilightforest:alpha_yeti_trophy",
+    "sortnum": 6,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Альфа Йети лёгкий босс $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречного леса$(). Его можно найти в зимнем биоме на поверхности в маленьком холме неподалёку от ледяного замка. Данный босс промежуточный для того чтобы открыть путь к Королеве."
+        },
+        {
+            "type": "entity",
+            "name": "Альфа Йети",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:alpha_yeti",
+            "scale": "0.6"
+        }
+    ]
+}
