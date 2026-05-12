@@ -6161,6 +6161,11 @@
       "size": 45714
     },
     {
+      "path": "mods/guardvillagers-1.20.1-1.6.17.jar",
+      "sha256": "3e63e9adb1cd273ce9881593c64b513477ebefeceb6b11f29a09b2237a422ace",
+      "size": 204742
+    },
+    {
       "path": "mods/hearth_and_home-forge-1.20.1-2.0.1.jar",
       "sha256": "abab7fd2849d8e4421f56d12ad4ae9f7ef521125654be5cada16c7ec1f0d1b8e",
       "size": 1184224
