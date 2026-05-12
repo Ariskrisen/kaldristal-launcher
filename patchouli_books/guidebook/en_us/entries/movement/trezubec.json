@@ -1,0 +1,11 @@
+{
+    "name": "Трезубец и тягун",
+    "icon": "minecraft:trident",
+    "category": "patchouli:movment_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Ещё одна интересная механика это трезубец с тягуном, он уже для тех, кто прокачан в этом мире и для тех кто нашёл трезубец!"
+        }
+    ]
+}

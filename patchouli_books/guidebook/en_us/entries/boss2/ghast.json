@@ -1,0 +1,19 @@
+{
+    "name": "Ур-гаст",
+    "icon": "twilightforest:ur_ghast_trophy",
+    "sortnum": 5,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Ур-гаст 4-й и долгий босс из категории $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречного леса$(). Он находится в тёмном лесу на своей огромной башне с куче головоломкой! Не расслабляйтесь, там будут очень много механизмов и загадок!"
+        },
+        {
+            "type": "entity",
+            "name": "Ур-гаст",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:ur_ghast",
+            "scale": "0.6"
+        }
+    ]
+}

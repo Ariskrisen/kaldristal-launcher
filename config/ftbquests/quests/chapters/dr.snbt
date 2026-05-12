@@ -1,0 +1,326 @@
+{
+	autofocus_id: "2ED0A803003B8475"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dr"
+	group: ""
+	icon: {
+		Count: 1
+		id: "relics:aqua_walker"
+		tag: {
+			abilities: {
+				walking: {
+					points: 0
+					stats: {
+						time: 57.49224d
+					}
+				}
+			}
+		}
+	}
+	id: "26C73B03C6536E13"
+	images: [
+		{
+			click: "https://discord.gg/ekR2dPSuk2"
+			height: 1.0d
+			hover: ["Дискорд Tale's Studio"]
+			image: "relics:item/magic_mirror_0"
+			rotation: 0.0d
+			width: 1.0d
+			x: -4.0d
+			y: -4.5d
+		}
+		{
+			height: 1.0d
+			image: "irons_spellbooks:item/divine_pearl"
+			rotation: -7.0d
+			width: 1.0d
+			x: 2.0d
+			y: -4.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:item/blaze_powder"
+			rotation: 0.0d
+			width: 1.0d
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			height: 1.0d
+			image: "ftbquests:block/menuanim"
+			rotation: 0.0d
+			width: 0.03125d
+			x: 0.0d
+			y: -14.0d
+		}
+		{
+			height: 1.7d
+			image: "cataclysm:textures/entity/flame_strike_sigil.png"
+			rotation: 0.0d
+			width: 1.7d
+			x: 0.0d
+			y: -4.5d
+		}
+		{
+			height: 1.2d
+			image: "cataclysm:textures/particle/trap_flame_2.png"
+			rotation: 0.0d
+			width: 1.2d
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			height: 15.0d
+			image: "ftbquests:block/menuanim"
+			rotation: 0.0d
+			width: 15.0d
+			x: 0.0d
+			y: -10.5d
+		}
+	]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"&6✅&r Сборка модов Lost Souls для Minecraft создана с целью обогатить игровой опыт и добавить больше фэнтезийных элементов в выживание игроков."
+				""
+				"&d✅&r Благодаря включенным модам как для Fabric, так и для Forge, игроки получают широкие возможности для настройки игрового процесса."
+				""
+				"&6✅&r Переведенная на русский язык, сборка облегчает взаимодействие с игровым контентом для русскоязычных игроков!"
+				""
+				"&d✅&r Кроме того, присутствие собственного ресурс-пака с переработанными текстурами большинства модов придает единый стиль всей сборки , что улучшает  впечатления от визуальной составляющей сборки !"
+				""
+				"&6✅&r Также части оружий из сборки добавлены качественные 3д-модели , что добавляет большего визуального наслаждения при его использовании!"
+				"Удачного пути , исследователь !"
+			]
+			hide: true
+			icon: "minecells:boss_stem_cell"
+			id: "2D8EB2902477E0E0"
+			rewards: [{
+				id: "1B2F7CCBA68A8A51"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			size: 1.0d
+			tasks: [{
+				id: "5C53F6888CE40CA5"
+				title: "&dLost Souls"
+				type: "checkmark"
+			}]
+			title: "&6Lost Souls"
+			x: 0.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: [
+				"&6Lost Souls&r имеет различные механики, которые сделают геймплей на сборке гараздо интереснее и разнообразнее. На следующих страницах можете ознакомится со всеми новыми механиками."
+				"{@pagebreak}"
+				"&6I&r: Диета"
+				""
+				"Теперь вам нужно будет соблюдать диету, питаясь разной едой. Всего есть пять категорий: фрукты, зёрна, протеины, овощи и сахар. В описании еды можно посмотреть, на какую категорию она влияет."
+				"{@pagebreak}"
+				"&6II&r: Выносливость"
+				""
+				"Над полоской голода появилась новая шкала. отвечающая за Вашу выносливость. Она позволяет совершать кувырки на клавишу ALT. Надетая броня влияет на максимальное количество выносливости. Зачарование \"Лёгкость\" уменьшает вес брони."
+				"{@pagebreak}"
+				"&6III&r: Элитры и глайдеры"
+				""
+				"Теперь вы не сможете использовать элитры в верхнем мире и незере из-за другой гравитации. Вместо элитр вы сможете создать планеры, которые будут заменой."
+				"{@pagebreak}"
+				"&6IV&r: Механика сна"
+				""
+				"После того, как вы ляжете на кровать, вам нужно будет нажать на пробел, чтобы уснуть. Советую менять постельное бельё, иначе можете проснуться с новыми друзьями под одеялом."
+				"{@pagebreak}"
+				"&6V&r: Двенадцать очей Эндера"
+				""
+				"Теперь по всему миру вам нужно будет находить различные очи, с их помощью вы сможете найти и активировать портал в энд."
+			]
+			icon: "minecells:ramparts_dimensional_rune"
+			id: "2F8849247EFF51EF"
+			rewards: [{
+				id: "3DAE3F98881BCAD3"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{
+				id: "4546A3A8CFE0C9FA"
+				title: "&dМеханики"
+				type: "checkmark"
+			}]
+			title: "&6Механики"
+			x: 2.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: [
+				"Автор проекта - &6Stefjinvu&r, основатель &6Tale's Studio&r."
+				""
+				"Где можно связаться?"
+				""
+				"&6Discord&r - Официальный сервер &6Tale's Studio&r"
+				"&6Почта&r - aerial.lri@gmail.com"
+			]
+			icon: {
+				Count: 1
+				id: "minecells:ramparts_doorway"
+				tag: {
+					BlockEntityTag: { }
+				}
+			}
+			id: "5BA63489CDEC91F3"
+			rewards: [{
+				id: "6A5BC1FEA7C0709F"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{
+				id: "1CC81354065A0FF8"
+				title: "&dАвтор сборки"
+				type: "checkmark"
+			}]
+			title: "&6Автор Сборки"
+			x: -2.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: [
+				"В нашей сборке реализовано кастомное древо прокачки. Оно открывается на клавишу \"Ё\"."
+				""
+				"Уровни для древа прокачки покупаются за опыт игрока. "
+				""
+				"Лимит уровней, доступных для покупки - 110."
+				""
+				"Каждый игрок может выбрать 1 боевой, 1 ремесленный класс и до 3 PVE подклассов (землекоп, охотник, рыбак и т. д.)"
+				""
+				"Прогресс древа прокачки можно сбросить свитком амнезии. "
+			]
+			icon: "cataclysm:desert_eye"
+			id: "4188FC0C261F2F71"
+			rewards: [{
+				id: "35C174BD1774251E"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "circle"
+			size: 1.0d
+			tasks: [{
+				id: "43B0B3331F8DFFBC"
+				title: "&dУникальность"
+				type: "checkmark"
+			}]
+			title: "&6Прокачка"
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: ["Создайте старинный атлас, чтобы ориентироваться в мире &6Lost&r &dSouls&r!"]
+			id: "24B46540C32946C4"
+			rewards: [{
+				id: "3E5288FA520CB845"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "1561FB5CFEECB084"
+				item: "antiqueatlas:empty_antique_atlas"
+				type: "item"
+			}]
+			title: "&6Старинный атлас"
+			x: 1.5d
+			y: -6.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: [
+				"Автором квестов является Aridj. "
+				"По всем проблемам, связанным с квестами писать:"
+				""
+				"Discord - &6aridj&f"
+			]
+			icon: "ftbquests:book"
+			id: "69F50911973A89A7"
+			rewards: [{
+				id: "4FBBEA57A5293B97"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "3E719D4413BDBFF5"
+				type: "checkmark"
+			}]
+			title: "&6Квестовая система"
+			x: -1.5d
+			y: -6.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: ["Одной из важных вещей в сборке является рюкзак. Его можно создать из разных видов кожи, золотых слитков и блоков шерсти. "]
+			id: "719D1E4E497920E6"
+			rewards: [{
+				id: "43FA317B29F75D09"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "25E93D059BBC1E18"
+				item: "backpacked:backpack"
+				type: "item"
+			}]
+			title: "&6Рюкзак"
+			x: 1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: [
+				"При первом заходе в мир Вы выбрали расу. Её можно изменить сферой происхождения, которая создаётся из любых 9 очей энда. Их полный список можно найти на вкладке &5Край&f."
+				"{image:endrem:item/cold_eye width:20 height:20 align:1}"
+			]
+			icon: "origins:orb_of_origin"
+			id: "207C1AAAF2C33E5A"
+			rewards: [{
+				id: "0F73EA5A4869BF7A"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "7A9BC1F58A93EC10"
+				type: "checkmark"
+			}]
+			title: "&6Сфера проихождения"
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2D8EB2902477E0E0"]
+			description: ["Свиток амнезии позволяет сбросить все уровни прокачки игрока. При его применении будут будут бесследно потеряны 20% уровней. Его возможно сделать из листа бумаги и 8 обрывков древних знаний, которые охраняет Варден."]
+			icon: "skilltree:amnesia_scroll"
+			id: "74981A54C25ECE7A"
+			rewards: [{
+				id: "43636C044AB4B1A6"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "56B5D4F29E9FC5F6"
+				item: "skilltree:amnesia_scroll"
+				type: "item"
+			}]
+			title: "&6Свиток амнезии"
+			x: 0.0d
+			y: -6.5d
+		}
+	]
+	title: "&d&l=>&r &lО сборке"
+}

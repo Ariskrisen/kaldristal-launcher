@@ -1,0 +1,573 @@
+{
+	autofocus_id: "5179F56D61B1B081"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "78A509453BB5FD0A"
+	group: "1098D066E0B91DCA"
+	icon: {
+		Count: 1
+		id: "minecells:spite_sword"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "78A509453BB5FD0A"
+	images: [
+		{
+			height: 2.0d
+			image: "minecraft:item/diamond_sword"
+			rotation: 90.0d
+			width: 2.0d
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			height: 2.0d
+			image: "aether:item/accessories/netherite_sword"
+			rotation: -180.0d
+			width: 2.0d
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			height: 0.75d
+			image: "minecraft:item/diamond"
+			rotation: 0.0d
+			width: 0.75d
+			x: -2.0d
+			y: 2.5d
+		}
+		{
+			height: 0.75d
+			image: "minecraft:item/netherite_ingot"
+			rotation: 0.0d
+			width: 0.75d
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			height: 1.0d
+			image: "irons_spellbooks:item/blood_vial"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			height: 1.0d
+			image: "iceandfire:item/dragon_sword"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "eidolon:item/mind_shielding_plate"
+			rotation: 0.0d
+			width: 1.0d
+			x: -0.5d
+			y: -2.5d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/berserker_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.5d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/berserker_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.5d
+			y: -0.5d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/berserker_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 5.0d
+			x: -7.5d
+			y: 1.5d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/warrior_armor_head"
+			order: 1
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.0d
+			y: -3.0d
+		}
+		{
+			height: 5.0d
+			image: "rogues:item/warrior_armor_chest"
+			rotation: 0.0d
+			width: 5.0d
+			x: 7.0d
+			y: -1.0d
+		}
+		{
+			height: 4.5d
+			image: "rogues:item/warrior_armor_legs"
+			order: -1
+			rotation: 0.0d
+			width: 4.5d
+			x: 7.11904761904762d
+			y: 1.3809523809523796d
+		}
+		{
+			height: 5.0d
+			image: "paladins:item/diamond_claymore"
+			order: -3
+			rotation: 180.0d
+			width: 5.0d
+			x: 8.0d
+			y: -1.5d
+		}
+		{
+			height: 8.0d
+			image: "rogues:item/diamond_double_axe"
+			order: -3
+			rotation: -90.0d
+			width: 8.0d
+			x: -9.0d
+			y: -2.0d
+		}
+	]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["&5Воин&f подразделяется на 3 подкласса, которые используют похожее снаряжение, состоящее из средней брони и оружия, наносящего большой урон. Этими подклассами являются: &6Мечник&f, &7Сокрушитель&f и &4Берсерк&f."]
+			id: "5179F56D61B1B081"
+			rewards: [{
+				id: "60047F57556EF9F6"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "hexagon"
+			tasks: [{
+				id: "07BB9C840DE095CE"
+				title: "Начало пути воина"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5179F56D61B1B081"]
+			description: ["Специализируется на нанесении большого урона двуручными и парными мечами, сражаясь лиуом к лицу с врагом."]
+			id: "44794FE00439871C"
+			rewards: [{
+				id: "48FFC67A7B0ED3EC"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "00DBCE804A7F382D"
+				type: "checkmark"
+			}]
+			title: "&6Мечник"
+			x: -2.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5179F56D61B1B081"]
+			description: ["Специализируется на снижении защиты врага, помогая другим членам отряда наносить урон."]
+			id: "74B8CF89678C1F9E"
+			rewards: [{
+				id: "0DBD9EE549069EBD"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "3EF11778E48196D0"
+				type: "checkmark"
+			}]
+			title: "&7Сокрушитель&f"
+			x: -0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["5179F56D61B1B081"]
+			description: ["Специализируется на превращении лица врага в фарш, не обращая внимание на собственные раны. Может накладывать эффект кровотечения и повышает свой урон в зависимости от отсутствующего здоровья."]
+			id: "2CD1B59922942074"
+			rewards: [{
+				id: "23A16567C2752B84"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "32AACE1056F6C8D9"
+				type: "checkmark"
+			}]
+			title: "&4Берсерк&f"
+			x: 1.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6B4E5BF8B18D0206"]
+			description: ["Создайте броню берсерка, повышающую ваш урон."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:berserker_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "3CE347AC8B306EDD"
+			rewards: [{
+				id: "247C93A7A753B721"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [
+				{
+					id: "76C649D2668111B8"
+					item: {
+						Count: 1
+						id: "rogues:berserker_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "0B59B2D9938E7FAF"
+					item: {
+						Count: 1
+						id: "rogues:berserker_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня берсерка"
+			x: -3.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6B4E5BF8B18D0206"]
+			description: ["Создайте броню берсерка, повышающую ваш урон."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:berserker_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "01C74C40D1A2D10C"
+			rewards: [{
+				id: "149D2B447FE92C0B"
+				type: "xp"
+				xp: 500
+			}]
+			tasks: [
+				{
+					id: "3E5A8D688FFED1BA"
+					item: {
+						Count: 1
+						id: "rogues:berserker_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "4544C262C4B207CB"
+					item: {
+						Count: 1
+						id: "rogues:berserker_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня берсерка"
+			x: -4.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["6B4E5BF8B18D0206"]
+			description: ["Создайте броню воина из железа и кожи."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:warrior_armor_head"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "700F05CA87BDA4A5"
+			rewards: [{
+				id: "21CF69F9807CF898"
+				type: "xp"
+				xp: 300
+			}]
+			tasks: [
+				{
+					id: "377CE3381EDC4AFF"
+					item: {
+						Count: 1
+						id: "rogues:warrior_armor_head"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6387749AEB8AB679"
+					item: {
+						Count: 1
+						id: "rogues:warrior_armor_chest"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня воина"
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6B4E5BF8B18D0206"]
+			description: ["Создайте броню берсерка, повышающую ваш урон."]
+			hide_dependency_lines: true
+			icon: {
+				Count: 1
+				id: "rogues:warrior_armor_legs"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "09A0CD1E3E860611"
+			rewards: [{
+				id: "6257A01382B1CD7D"
+				type: "xp"
+				xp: 300
+			}]
+			tasks: [
+				{
+					id: "302E8F2F5FC30261"
+					item: {
+						Count: 1
+						id: "rogues:warrior_armor_legs"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "7EA926F03BA17421"
+					item: {
+						Count: 1
+						id: "rogues:warrior_armor_feet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Броня воина"
+			x: 3.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["52625DE0B7344FA3"]
+			description: ["Создайте алмазный клеймор."]
+			hide_dependency_lines: true
+			id: "07344B4BADB01A9B"
+			rewards: [{
+				id: "2B6CE11C3CC4DBA7"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "6296B60C626D19FE"
+				item: {
+					Count: 1
+					id: "paladins:diamond_claymore"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["52625DE0B7344FA3"]
+			description: ["Создайте алмазный двуручный топор."]
+			hide_dependency_lines: true
+			id: "48F4A0097CAFC5DF"
+			rewards: [{
+				id: "2FDCAAA60818D020"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "0C73A9148D0B20B1"
+				item: {
+					Count: 1
+					id: "rogues:diamond_double_axe"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["52625DE0B7344FA3"]
+			description: ["Создайте алмазный боевой молот."]
+			hide_dependency_lines: true
+			id: "4AD6D104B634B8AD"
+			rewards: [{
+				id: "0A75F6A2FA3B5262"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "5F757E113D72F685"
+				item: {
+					Count: 1
+					id: "paladins:diamond_great_hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["07344B4BADB01A9B"]
+			description: ["Создайте незеритовый клеймор."]
+			id: "42D39186BB357EE1"
+			rewards: [{
+				id: "72634F8519060A2C"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "5688219C51D9157E"
+				item: {
+					Count: 1
+					id: "paladins:netherite_claymore"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["48F4A0097CAFC5DF"]
+			description: ["Создайте незеритовый двуручный топор."]
+			id: "424BF58DEAEFC6F1"
+			rewards: [{
+				id: "7B72651D51CAEC59"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "0343E23EC04A7E57"
+				item: {
+					Count: 1
+					id: "rogues:netherite_double_axe"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["4AD6D104B634B8AD"]
+			description: ["Создайте незеритовый боевой молот."]
+			id: "54BEB9C7F124A90B"
+			rewards: [{
+				id: "2C7BF856BED180A5"
+				type: "xp"
+				xp: 200
+			}]
+			tasks: [{
+				id: "5FB4ED623CEAF71C"
+				item: {
+					Count: 1
+					id: "paladins:netherite_great_hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5179F56D61B1B081"]
+			description: ["Большинство сетов брони на эти классы уже есть в других ветках квестов, таких как: &5Герои былых времён&f, &5Боссы&f, &5Драконы&f, &5Незер&f."]
+			id: "6B4E5BF8B18D0206"
+			rewards: [{
+				id: "6CA99662F9C0C464"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "559FDB677CC90F03"
+				title: "Броня"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5179F56D61B1B081"]
+			description: ["Лучшие виды оружия на эти классы уже есть в других ветках квестов, таких как: &5Боссы&f, &5Драконы&f, &5Незер&f, &5Герои былых времён&f."]
+			id: "52625DE0B7344FA3"
+			rewards: [{
+				id: "1C16DD33D5D90EA5"
+				type: "xp"
+				xp: 10
+			}]
+			shape: "square"
+			tasks: [{
+				id: "04A228C6C25E9846"
+				title: "Оружие"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+	]
+	title: "&d3.2&r: &lВоин"
+}

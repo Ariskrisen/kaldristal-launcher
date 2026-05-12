@@ -1,0 +1,20 @@
+{
+    "name": "Лич",
+    "icon": "twilightforest:lich_trophy",
+    "sortnum": 1,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Лич - это второй из боссов $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречного леса$(). Этот босс очень опасен, если не знать его атаки и сильно волноваться то игрок может потерять рассчёт его атак и умереть. Этот босс открывает путь к Гриботавру"
+        },
+        {
+            "type": "entity",
+            "name": "Лич",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:lich",
+            "scale": "1",
+            "offset": "0.1"
+        }
+    ]
+}

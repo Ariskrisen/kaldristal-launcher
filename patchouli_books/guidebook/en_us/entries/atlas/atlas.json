@@ -1,0 +1,20 @@
+{
+    "name": "Атлас",
+    "icon": "antiqueatlas:antique_atlas",
+    "category": "patchouli:atlas_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Что такое атлас? Атлас это карта всех исследованных вами территории. Он является заменой миникарты на нашем проекте. В атласе можно ставить и давать названия своим меткам. Скрафтить её можно предметами Компас + Книга"
+        },
+        {
+            "type": "image",
+            "text": "",
+            "title": "",
+            "border": true,
+            "images": [
+                "patchouli:atlas.png"
+            ]
+        }
+    ]
+}

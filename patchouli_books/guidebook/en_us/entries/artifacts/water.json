@@ -1,0 +1,17 @@
+{
+    "name": "Водные бегуны",
+    "icon": "artifacts:aqua_dashers",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Вы представляли себя когда нибудь Иисусом? Интересные ботинки которые дадут возможность бегать по воде!"
+        },
+        {
+            "type": "spotlight",
+            "title": "Водные бегуны",
+            "text": "Позволяет владельцу перемещаться по жидкостям по время бега $(#F55C8E)[CTRL]",
+            "item": "artifacts:aqua_dashers"
+        }
+    ]
+}

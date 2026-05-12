@@ -1,0 +1,17 @@
+{
+    "name": "Универс. магнит",
+    "icon": "artifacts:universal_attractor",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Довольно интересный предмет который может притягивать вещи. Я кстати такой уже видел только в мире TwilightForest, там был похожий магнит только он притягивал руды к себе, или это горн был?..."
+        },
+        {
+            "type": "spotlight",
+            "title": "Универсальный магнит",
+            "text": "Данный магнит притягивает ближайшие предметы",
+            "item": "artifacts:universal_attractor"
+        }
+    ]
+}

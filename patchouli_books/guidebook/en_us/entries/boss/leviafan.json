@@ -1,0 +1,31 @@
+{
+    "name": "Левиафан",
+    "icon": "cataclysm:the_baby_leviathan_bucket",
+    "sortnum": 5,
+    "category": "patchouli:boss_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Для того чтобы найти данного босса, нужно скрафтить $(#9065E5)Око бездны$() которое покажет вам путь в его данж! Но будьте осторожны, данный босс очень агрессивен и он находится под водой!"
+        },
+        {
+            "type": "crafting",
+            "title": "Рецепт Ока бездны",
+            "text": "Этот рецепт покажет вам путь в подводный город Левиафана. Узнать о боссе можно в следующей странице.",
+            "recipe": "cataclysm:abyss_eye"
+        },
+        {
+            "type": "entity",
+            "name": "Левиафан",
+            "text": "Данный босс находится в обычном мире.",
+            "entity": "cataclysm:the_leviathan",
+            "scale": "0.3"
+        },
+        {
+            "type": "crafting",
+            "title": "Жертва для бездны",
+            "text": "Данным предметом вы сможете разбудить левиафана тыкнув ПКМ по алтарю.",
+            "recipe": "cataclysm:abyssal_sacrifice"
+        }
+    ]
+}

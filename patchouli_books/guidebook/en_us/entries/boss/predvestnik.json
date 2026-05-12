@@ -1,0 +1,31 @@
+{
+    "name": "Предвестник",
+    "icon": "cataclysm:witherite_block",
+    "sortnum": 9,
+    "category": "patchouli:boss_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Для того чтобы найти данного босса, нужно скрафтить $(#9065E5)Меха-Глаз$(). С данного босса выпадает одно из око для эндер мира."
+        },
+        {
+            "type": "crafting",
+            "title": "Меха-Глаз",
+            "text": "Данное око покажет вам где находится арена Предвестника.",
+            "recipe": "cataclysm:mech_eye"
+        },
+        {
+            "type": "entity",
+            "name": "Предвестник",
+            "text": "Данный босс находится в обычном мире под землёй.",
+            "entity": "cataclysm:the_harbinger",
+            "scale": "0.8"
+        },
+        {
+            "type": "spotlight",
+            "title": "Звезда незера",
+            "text": "Звезда незера является активатором босса.",
+            "item": "minecraft:nether_star"
+        }
+    ]
+}

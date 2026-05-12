@@ -1,0 +1,17 @@
+{
+    "name": "Рука края",
+    "icon": "relics:enders_hand",
+    "category": "patchouli:relics_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Эта рука похожие на все остальные, интересно, а сколько силы в этой перчатке? Много или мало? Она тяжёлая или лёгкая?"
+        },
+        {
+            "type": "spotlight",
+            "title": "Рука края",
+            "text": "При использовании навыка вы можете поменяться местами с мобом/игроком.",
+            "item": "relics:enders_hand"
+        }
+    ]
+}

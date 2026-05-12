@@ -1,0 +1,17 @@
+{
+    "name": "Ожерелье медузы",
+    "icon": "relics:jellyfish_necklace",
+    "category": "patchouli:relics_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Я даю урон своим союзникам просто прикасаясь? Это же электричество которые мы проводим при натерании одежды!"
+        },
+        {
+            "type": "spotlight",
+            "title": "Ожерелье медузы",
+            "text": "Вы можете наносить урон любым мобам или игрокам просто подойдя к ним вплотную.",
+            "item": "relics:jellyfish_necklace"
+        }
+    ]
+}

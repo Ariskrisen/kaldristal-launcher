@@ -1,0 +1,35 @@
+{
+"name": "Портал в адский мир",
+"icon": "minecraft:obsidian",
+"category": "patchouli:world_category",
+"pages": [
+{
+"type": "multiblock",
+"name": "Портал в Незер",
+"text": "Для того чтобы создать портал нам нужно будет взять 10 обсидиана",
+"multiblock": {
+"pattern": [
+[ " OO " ],
+[ "OPPO" ],
+[ "OPPO" ],
+[ "OPPO" ],
+[ " O0 " ]
+],
+"mapping": {
+" ": "ANY",
+"0": "minecraft:obsidian",
+"O": "minecraft:obsidian",
+"P": "AIR"
+},
+"symmetrical": true,
+"offset" : [0, 0, 0],
+"view_offset": [0, 0, 0]
+}
+}, {
+"type": "spotlight",
+"title": "Как его активировать?",
+"text": "Просто создайте зажигалку или же любым другим огненым предметом внутри рамки!",
+"item": "minecraft:flint_and_steel"
+}
+]
+}

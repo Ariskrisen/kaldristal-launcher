@@ -1,0 +1,17 @@
+{
+    "name": "Ковбойская шляпа",
+    "icon": "artifacts:cowboy_hat",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Думаю, с этой ковбойской шляпой было много восспоминаний! На ней точно катались на лошади и пели песенку, как она там начиналась? Вроде I got the horses in the back, horse tack is attached"
+        },
+        {
+            "type": "spotlight",
+            "title": "Ковбойская шляпа",
+            "text": "Увеличивает скорость на верховых животных, по типу лошади или свиньи.",
+            "item": "artifacts:cowboy_hat"
+        }
+    ]
+}

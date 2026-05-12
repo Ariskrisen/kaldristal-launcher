@@ -1,0 +1,19 @@
+{
+    "name": "Снежная королева",
+    "icon": "twilightforest:snow_queen_trophy",
+    "sortnum": 6,
+    "category": "patchouli:boss2_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Снежная королева является почти последним боссом $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречного леса$(). Её можно найти на глыбах льда в снежном биоме, там вы сможете найти мобов которые могут вас замедлить. А так-же встречаются все виды особенных луков!"
+        },
+        {
+            "type": "entity",
+            "name": "Снежная королева",
+            "text": "Данный босс встречается в $(l:patchouli:world/twilightforest)$(#5BA52E)сумеречном лесу$()",
+            "entity": "twilightforest:snow_queen",
+            "scale": "0.8"
+        }
+    ]
+}

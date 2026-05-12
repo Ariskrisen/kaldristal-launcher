@@ -1,0 +1,17 @@
+{
+    "name": "Шоковый кулон",
+    "icon": "artifacts:shock_pendant",
+    "category": "patchouli:artefact_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Бзз.. Этот кулон такой эл.. ле...ктрический, в нём очень сильная ээ..нергия, не надо его наверное трогать..."
+        },
+        {
+            "type": "spotlight",
+            "title": "Шоковый кулон",
+            "text": "Данный кулон может ударить молнией по нападающему, даёт защиту от ударов молнии!.",
+            "item": "artifacts:shock_pendant"
+        }
+    ]
+}

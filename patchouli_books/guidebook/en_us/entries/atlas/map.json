@@ -1,0 +1,20 @@
+{
+    "name": "Карта и баннеры",
+    "icon": "minecraft:filled_map",
+    "category": "patchouli:atlas_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Ещё один интересный способ запомнить место, это использовать карту и баннер. $(#AE2789)ПКМ $()картой по баннеру сделает метку на карте."
+        },
+        {
+            "type": "image",
+            "text": "",
+            "title": "",
+            "border": true,
+            "images": [
+                "patchouli:atlas.png"
+            ]
+        }
+    ]
+}

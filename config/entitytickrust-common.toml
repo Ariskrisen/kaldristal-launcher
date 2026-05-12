@@ -1,0 +1,9 @@
+#Horizontal radius (XZ) for entity ticking around players
+#Range: 1.0 ~ 1024.0
+radiusXZ = 120.0
+#Vertical radius (Y) for entity ticking around players
+#Range: 1.0 ~ 512.0
+radiusY = 40.0
+#List of entity type resource locations (e.g. minecraft:villager) that should always be allowed by the Rust filter.
+whitelist = []
+
