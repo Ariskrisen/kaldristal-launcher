@@ -6162,6 +6162,11 @@
       "size": 45714
     },
     {
+      "path": "mods/guardvillagers-1.20.1-1.6.17.jar",
+      "sha256": "3e63e9adb1cd273ce9881593c64b513477ebefeceb6b11f29a09b2237a422ace",
+      "size": 204742
+    },
+    {
       "path": "mods/hearth_and_home-forge-1.20.1-2.0.1.jar",
       "sha256": "abab7fd2849d8e4421f56d12ad4ae9f7ef521125654be5cada16c7ec1f0d1b8e",
       "size": 1184224
@@ -7667,11 +7672,6 @@
       "size": 762
     },
     {
-      "path": "resourcepacks/Player_Animations_No_Eyes.zip",
-      "sha256": "71763eef0ca9bb67e675175ea6a19923f7f501239b3945cf7d90a3703dece964",
-      "size": 250762
-    },
-    {
       "path": "resourcepacks/FA+All_Extensions-v1.4.zip1",
       "sha256": "a458a77993aa9540fb0b584ac084019fa1bb1cc42ca21a0d344596d24c2d878e",
       "size": 129064
@@ -8530,6 +8530,11 @@
       "path": "resourcepacks/Lost Leaves.zip",
       "sha256": "89472f3986a341444f74b730dd3d9d00632a243e38eb31c22d30a9739489f1f9",
       "size": 586066
+    },
+    {
+      "path": "resourcepacks/Player_Animations_No_Eyes.zip",
+      "sha256": "71763eef0ca9bb67e675175ea6a19923f7f501239b3945cf7d90a3703dece964",
+      "size": 250762
     },
     {
       "path": "resourcepacks/Quark Programmer Art.zip",
