@@ -550,6 +550,42 @@
             }
         }
 
+        function traverseEntry(entry, path, files) {
+            return new Promise((resolve) => {
+                if (entry.isFile) {
+                    entry.file((file) => {
+                        Object.defineProperty(file, 'fullPath', {
+                            value: (path ? path + '/' : '') + entry.name
+                        });
+                        files.push(file);
+                        resolve();
+                    });
+                } else if (entry.isDirectory) {
+                    const reader = entry.createReader();
+                    const base = path ? path + '/' + entry.name : entry.name;
+                    const readAll = () => {
+                        reader.readEntries((entries) => {
+                            if (entries.length === 0) { resolve(); return; }
+                            Promise.all(entries.map(e => traverseEntry(e, base, files))).then(readAll);
+                        });
+                    };
+                    readAll();
+                } else {
+                    resolve();
+                }
+            });
+        }
+
+        async function handleDrop(items) {
+            const files = [];
+            const base = currentFolder ? currentFolder + '/' : '';
+            for (const item of items) {
+                const entry = item.webkitGetAsEntry();
+                if (entry) await traverseEntry(entry, base, files);
+            }
+            if (files.length > 0) handleFiles(files);
+        }
+
         async function handleFiles(files) {
             let ok = 0, fail = 0;
             const countEl = document.getElementById('upload-count');
@@ -729,7 +765,15 @@
         const dropZone = document.getElementById('drop-zone');
         dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
         dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
-        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+                handleDrop(e.dataTransfer.items);
+            } else {
+                handleFiles(e.dataTransfer.files);
+            }
+        });
 
         window.onload = initDashboard;
     </script>
