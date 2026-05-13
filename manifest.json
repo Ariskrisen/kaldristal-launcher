@@ -5399,7 +5399,8 @@
     {
       "path": "kubejs/client_scripts/main.js",
       "sha256": "6c41999e0d48c2f9978b9ae09c8d5f6dee8804547869bc2f1e93580cc8f7599a",
-      "size": 7115
+      "size": 7115,
+      "updated_at": "2026-05-13T14:05:27.427Z"
     },
     {
       "path": "kubejs/config/client.properties",
