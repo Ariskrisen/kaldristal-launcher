@@ -7,11 +7,6 @@
   "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.0/",
   "files": [
     {
-      "path": "client_scripts/main.js",
-      "sha256": "6c41999e0d48c2f9978b9ae09c8d5f6dee8804547869bc2f1e93580cc8f7599a",
-      "size": 7115
-    },
-    {
       "path": "config/accessories.json5",
       "sha256": "d459b76d2a92b8770584a407f8bfc6570cc17923e95c32e23d083fe14505e60d",
       "size": 745
