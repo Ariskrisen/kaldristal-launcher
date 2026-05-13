@@ -5,6 +5,7 @@ use axum::{
     routing::get,
     Json, Router,
 };
+use base64::Engine;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use std::{env, sync::Arc};
@@ -269,51 +270,90 @@ async fn handle_put_file(
         return e.into_response();
     }
 
-    // Get SHA of existing file (if any)
-    let sha = get_file_sha(&state, &query.path).await;
-
-    let mut payload = serde_json::json!({
-        "message": body.message,
-        "content": body.content,
-    });
-    if let Some(s) = sha {
-        payload["sha"] = serde_json::json!(s);
+    // Decode base64 to check size
+    let raw_bytes = match base64::engine::general_purpose::STANDARD.decode(&body.content) {
+        Ok(b) => b,
+        Err(e) => {
+            return (
+                StatusCode::BAD_REQUEST,
+                Json(serde_json::json!({"error": format!("Invalid base64: {}", e)})),
+            )
+                .into_response();
+        }
     };
 
-    let resp = state
-        .client
-        .put(gh_url(&query.path))
-        .header("Authorization", format!("Bearer {}", state.github_token))
-        .header("User-Agent", "kd-backend/0.1")
-        .json(&payload)
-        .send()
-        .await;
+    // Extract filename from path
+    let file_name = query.path.split('/').last().unwrap_or(&query.path);
 
-    match resp {
-        Ok(r) if r.status().is_success() => {
-            match r.json::<serde_json::Value>().await {
-                Ok(data) => (StatusCode::OK, Json(data)).into_response(),
-                Err(e) => (
-                    StatusCode::BAD_GATEWAY,
-                    Json(serde_json::json!({"error": e.to_string()})),
-                )
-                    .into_response(),
+    // Route based on size
+    if raw_bytes.len() <= MAX_CONTENTS_SIZE {
+        // Small file — use GitHub Contents API
+        let sha = get_file_sha(&state, &query.path).await;
+
+        let mut payload = serde_json::json!({
+            "message": body.message,
+            "content": body.content,
+        });
+        if let Some(s) = sha {
+            payload["sha"] = serde_json::json!(s);
+        };
+
+        let resp = state
+            .client
+            .put(gh_url(&query.path))
+            .header("Authorization", format!("Bearer {}", state.github_token))
+            .header("User-Agent", "kd-backend/0.1")
+            .json(&payload)
+            .send()
+            .await;
+
+        match resp {
+            Ok(r) if r.status().is_success() => {
+                match r.json::<serde_json::Value>().await {
+                    Ok(data) => (StatusCode::OK, Json(data)).into_response(),
+                    Err(e) => (
+                        StatusCode::BAD_GATEWAY,
+                        Json(serde_json::json!({"error": e.to_string()})),
+                    )
+                        .into_response(),
+                }
             }
-        }
-        Ok(r) => {
-            let status = r.status();
-            let text = r.text().await.unwrap_or_default();
-            (
-                StatusCode::from_u16(status.as_u16()).unwrap_or(StatusCode::BAD_GATEWAY),
-                Json(serde_json::json!({"error": format!("GitHub {}: {}", status, text)})),
+            Ok(r) => {
+                let status = r.status();
+                let text = r.text().await.unwrap_or_default();
+                (
+                    StatusCode::from_u16(status.as_u16()).unwrap_or(StatusCode::BAD_GATEWAY),
+                    Json(serde_json::json!({"error": format!("GitHub {}: {}", status, text)})),
+                )
+                    .into_response()
+            }
+            Err(e) => (
+                StatusCode::BAD_GATEWAY,
+                Json(serde_json::json!({"error": e.to_string()})),
             )
-                .into_response()
+                .into_response(),
         }
-        Err(e) => (
-            StatusCode::BAD_GATEWAY,
-            Json(serde_json::json!({"error": e.to_string()})),
-        )
-            .into_response(),
+    } else {
+        // Large file — upload to GitHub Releases
+        let file_size = raw_bytes.len();
+        let release_tag = env::var("RELEASE_TAG").unwrap_or_else(|_| "mod-files".to_string());
+
+        let release = match ensure_release(&state, &release_tag).await {
+            Ok(r) => r,
+            Err(e) => return e.into_response(),
+        };
+
+        let download_url = match upload_asset(&state, &release, file_name, raw_bytes).await {
+            Ok(u) => u,
+            Err(e) => return e.into_response(),
+        };
+
+        (StatusCode::OK, Json(serde_json::json!({
+            "ok": true,
+            "download_url": download_url,
+            "size": file_size,
+        })))
+        .into_response()
     }
 }
 
@@ -380,6 +420,162 @@ async fn handle_delete_file(
     }
 }
 
+const MAX_CONTENTS_SIZE: usize = 1_000_000; // 1MB — GitHub Contents API limit
+
+/// Get or create a release with the given tag, return its id
+async fn ensure_release(state: &AppState, tag: &str) -> Result<serde_json::Value, (StatusCode, Json<ErrorResponse>)> {
+    // Try to get existing release
+    let url = format!(
+        "https://api.github.com/repos/{}/releases/tags/{}",
+        state.repo_path, tag
+    );
+    let resp = state
+        .client
+        .get(&url)
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .send()
+        .await
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+
+    if resp.status().is_success() {
+        return resp.json().await.map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        });
+    }
+
+    // Create new release
+    let create_url = format!("https://api.github.com/repos/{}/releases", state.repo_path);
+    let payload = serde_json::json!({
+        "tag_name": tag,
+        "name": tag,
+        "body": "Auto-uploaded mod files",
+        "draft": false,
+        "prerelease": false,
+    });
+
+    let create_resp = state
+        .client
+        .post(&create_url)
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+
+    if create_resp.status().is_success() {
+        create_resp.json().await.map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })
+    } else {
+        let status = create_resp.status();
+        let text = create_resp.text().await.unwrap_or_default();
+        Err((
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to create release ({}): {}", status, text),
+            }),
+        ))
+    }
+}
+
+/// Upload a file as an asset to a release, return the download URL
+async fn upload_asset(
+    state: &AppState,
+    release: &serde_json::Value,
+    file_name: &str,
+    data: Vec<u8>,
+) -> Result<String, (StatusCode, Json<ErrorResponse>)> {
+    let upload_url_template = release["upload_url"]
+        .as_str()
+        .ok_or_else(|| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse {
+                    error: "No upload_url in release".into(),
+                }),
+            )
+        })?;
+
+    // Strip the {?name,label} suffix from the template
+    let upload_url = upload_url_template
+        .split('{')
+        .next()
+        .unwrap_or(upload_url_template);
+
+    let asset_url = format!("{}?name={}", upload_url, urlencode(file_name));
+
+    let resp = state
+        .client
+        .post(&asset_url)
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .header("Content-Type", "application/octet-stream")
+        .body(data)
+        .send()
+        .await
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+
+    if resp.status().is_success() {
+        let asset: serde_json::Value = resp.json().await.map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+        let browser_url = asset["browser_download_url"]
+            .as_str()
+            .unwrap_or("")
+            .to_string();
+        Ok(browser_url)
+    } else {
+        let status = resp.status();
+        let text = resp.text().await.unwrap_or_default();
+        Err((
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to upload asset ({}): {}", status, text),
+            }),
+        ))
+    }
+}
+
+fn urlencode(s: &str) -> String {
+    let mut result = String::new();
+    for b in s.bytes() {
+        match b {
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => {
+                result.push(b as char);
+            }
+            b' ' => result.push_str("%20"),
+            _ => result.push_str(&format!("%{:02X}", b)),
+        }
+    }
+    result
+}
+
 async fn get_file_sha(state: &AppState, path: &str) -> Option<String> {
     let resp = state
         .client
@@ -439,7 +635,7 @@ async fn main() {
         .route("/admin", get(handle_admin))
         .route("/admin/", get(handle_admin))
         .layer(CorsLayer::permissive())
-        .layer(DefaultBodyLimit::max(10 * 1024 * 1024))
+        .layer(DefaultBodyLimit::max(150 * 1024 * 1024))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind(&bind).await.unwrap();

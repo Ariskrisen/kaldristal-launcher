@@ -570,12 +570,14 @@
                         const errText = await resp.text();
                         let errMsg;
                         try { const j = JSON.parse(errText); errMsg = j.error || errText; } catch { errMsg = errText; }
-                        if (resp.status === 413) errMsg += ' (файл слишком большой, макс ~1MB)';
                         throw new Error(errMsg);
                     }
 
+                    const respData = await resp.json().catch(() => ({}));
+                    const entry = { path: relPath, sha256: hash, size: file.size };
+                    if (respData.download_url) entry.download_base = respData.download_url;
                     manifest.files = manifest.files.filter(f => f.path !== relPath);
-                    manifest.files.push({ path: relPath, sha256: hash, size: file.size });
+                    manifest.files.push(entry);
                     newFiles.add(relPath);
                     setTimeout(() => { newFiles.delete(relPath); renderFiles(); }, 18000);
                     ok++;

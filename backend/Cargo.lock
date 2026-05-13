@@ -633,6 +633,7 @@ name = "kd-backend"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "base64",
  "hex",
  "reqwest",
  "serde",
