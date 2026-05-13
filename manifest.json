@@ -6907,12 +6907,6 @@
       "size": 54173
     },
     {
-      "path": "mods/Steam_Rails-1.6.13-alpha+forge-mc1.20.1.jar",
-      "sha256": "d8c01cc9b9d8dd57238fe539b567f34e2ab134a8ad8dfc8e9fb30f9cb25322cd",
-      "size": 10036200,
-      "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/mod-files/Steam_Rails-1.6.13-alpha%2Bforge-mc1.20.1.jar"
-    },
-    {
       "path": "mods/structure_gel-1.20.1-2.16.2.jar",
       "sha256": "1584a5aed31c0f63e53c29d53cf4e069cdabf358e785240cc500702dc5918e3e",
       "size": 966028
