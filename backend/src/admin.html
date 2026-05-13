@@ -287,15 +287,16 @@
             return h;
         }
 
-        async function fetchWithRetry(url, opts, retries = 3, delay = 3000) {
+        async function fetchWithRetry(url, opts, retries = 4, delay = 3000) {
             for (let i = 0; i < retries; i++) {
                 try {
                     const resp = await fetch(url, opts);
-                    return resp;
+                    if (resp.ok || resp.status < 500) return resp;
+                    if (i === retries - 1) return resp;
                 } catch (e) {
                     if (i === retries - 1) throw e;
-                    await new Promise(r => setTimeout(r, delay));
                 }
+                await new Promise(r => setTimeout(r, delay));
             }
         }
 
@@ -581,7 +582,12 @@
                 }
             }
 
-            await saveManifest();
+            try {
+                await saveManifest();
+            } catch (e) {
+                console.error('saveManifest error:', e);
+                if (ok === 0) fail = files.length;
+            }
             renderFolders(currentFolder);
 
             if (ok > 0) {
@@ -603,11 +609,11 @@
             delete manifest.sha;
             const content = btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2))));
 
-            const resp = await fetch(api('/manifest'), {
+            const resp = await fetchWithRetry(api('/manifest'), {
                 method: 'PUT',
                 headers: authHeaders(),
                 body: JSON.stringify({ content: content, message: 'Update manifest' }),
-            });
+            }, 3, 5000);
 
             if (!resp.ok) {
                 const err = await resp.text();
