@@ -444,6 +444,7 @@
             } else {
                 selectFolder(currentFolder);
             }
+
         }
 
         function getFilesInFolder(folder) {
@@ -801,6 +802,20 @@
                 handleDrop(e.dataTransfer.items);
             } else {
                 handleFiles(e.dataTransfer.files);
+            }
+        });
+
+        const folderList = document.getElementById('folder-list');
+        folderList.addEventListener('dragover', (e) => { e.preventDefault(); folderList.style.outline = '2px dashed var(--accent)'; });
+        folderList.addEventListener('dragleave', () => { folderList.style.outline = ''; });
+        folderList.addEventListener('drop', async (e) => {
+            e.preventDefault();
+            folderList.style.outline = '';
+            if (e.target !== folderList) return;
+            if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+                selectFolder('');
+                await handleDrop(e.dataTransfer.items);
+                renderFolders(currentFolder);
             }
         });
 
