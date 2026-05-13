@@ -366,48 +366,131 @@ async fn handle_delete_file(
         return e.into_response();
     }
 
-    // Get SHA first
-    let sha = match get_file_sha(&state, &query.path).await {
-        Some(s) => s,
-        None => {
+    // Try Contents API first (for files in git)
+    if let Some(sha) = get_file_sha(&state, &query.path).await {
+        let payload = serde_json::json!({
+            "message": format!("Delete {}", query.path),
+            "sha": sha,
+        });
+
+        let resp = state
+            .client
+            .delete(gh_url(&query.path))
+            .header("Authorization", format!("Bearer {}", state.github_token))
+            .header("User-Agent", "kd-backend/0.1")
+            .json(&payload)
+            .send()
+            .await;
+
+        return match resp {
+            Ok(r) if r.status().is_success() => {
+                match r.json::<serde_json::Value>().await {
+                    Ok(data) => (StatusCode::OK, Json(data)).into_response(),
+                    Err(e) => (
+                        StatusCode::BAD_GATEWAY,
+                        Json(serde_json::json!({"error": e.to_string()})),
+                    )
+                        .into_response(),
+                }
+            }
+            Ok(r) => {
+                let status = r.status();
+                let text = r.text().await.unwrap_or_default();
+                (
+                    StatusCode::from_u16(status.as_u16()).unwrap_or(StatusCode::BAD_GATEWAY),
+                    Json(serde_json::json!({"error": format!("GitHub {}: {}", status, text)})),
+                )
+                    .into_response()
+            }
+            Err(e) => (
+                StatusCode::BAD_GATEWAY,
+                Json(serde_json::json!({"error": e.to_string()})),
+            )
+                .into_response(),
+        };
+    }
+
+    // Not in git — check if it's a release asset
+    let file_name = query.path.split('/').last().unwrap_or(&query.path);
+    let release_tag = env::var("RELEASE_TAG").unwrap_or_else(|_| "mod-files".to_string());
+
+    // Get the release
+    let release_url = format!(
+        "https://api.github.com/repos/{}/releases/tags/{}",
+        state.repo_path, release_tag
+    );
+    let release_resp = state
+        .client
+        .get(&release_url)
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .send()
+        .await;
+
+    let release = match release_resp {
+        Ok(r) if r.status().is_success() => r.json::<serde_json::Value>().await.unwrap_or_default(),
+        _ => {
             return (
                 StatusCode::NOT_FOUND,
-                Json(serde_json::json!({"error": "File not found"})),
+                Json(serde_json::json!({"error": "File not found in git or releases"})),
             )
                 .into_response();
         }
     };
 
-    let payload = serde_json::json!({
-        "message": format!("Delete {}", query.path),
-        "sha": sha,
+    // Find asset by name
+    let assets = release["assets"].as_array().cloned().unwrap_or_default();
+    let asset = assets.iter().find(|a| {
+        a["name"].as_str().unwrap_or("") == file_name
     });
 
-    let resp = state
+    let asset_id = match asset {
+        Some(a) => a["id"].as_i64().unwrap_or(0),
+        None => {
+            return (
+                StatusCode::NOT_FOUND,
+                Json(serde_json::json!({"error": "File not found in release assets"})),
+            )
+                .into_response();
+        }
+    };
+
+    // Delete asset
+    let delete_url = format!(
+        "https://api.github.com/repos/{}/releases/assets/{}",
+        state.repo_path, asset_id
+    );
+    let del_resp = state
         .client
-        .delete(gh_url(&query.path))
+        .delete(&delete_url)
         .header("Authorization", format!("Bearer {}", state.github_token))
         .header("User-Agent", "kd-backend/0.1")
-        .json(&payload)
         .send()
         .await;
 
-    match resp {
-        Ok(r) if r.status().is_success() => {
-            match r.json::<serde_json::Value>().await {
-                Ok(data) => (StatusCode::OK, Json(data)).into_response(),
-                Err(e) => (
-                    StatusCode::BAD_GATEWAY,
-                    Json(serde_json::json!({"error": e.to_string()})),
+    match del_resp {
+        Ok(r) if r.status().is_success() || r.status() == StatusCode::NO_CONTENT => {
+            // Remove from manifest
+            let manifest_result = remove_from_manifest(&state, &query.path).await;
+            if let Err(e) = manifest_result {
+                return (
+                    StatusCode::OK,
+                    Json(serde_json::json!({
+                        "ok": true,
+                        "warning": "Asset deleted but manifest update failed",
+                        "error": e.1 .0.error,
+                    })),
                 )
-                    .into_response(),
+                    .into_response();
             }
+            (StatusCode::OK, Json(serde_json::json!({"ok": true})))
+                .into_response()
         }
         Ok(r) => {
             let status = r.status();
             let text = r.text().await.unwrap_or_default();
             (
-                StatusCode::from_u16(status.as_u16()).unwrap_or(StatusCode::BAD_GATEWAY),
+                StatusCode::BAD_GATEWAY,
                 Json(serde_json::json!({"error": format!("GitHub {}: {}", status, text)})),
             )
                 .into_response()
@@ -418,6 +501,115 @@ async fn handle_delete_file(
         )
             .into_response(),
     }
+}
+
+/// Remove a file entry from the manifest
+async fn remove_from_manifest(
+    state: &AppState,
+    path: &str,
+) -> Result<(), (StatusCode, Json<ErrorResponse>)> {
+    // Fetch current manifest
+    let resp = state
+        .client
+        .get(gh_url("manifest.json"))
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .send()
+        .await
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+
+    if !resp.status().is_success() {
+        return Err((
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to fetch manifest: {}", resp.status()),
+            }),
+        ));
+    }
+
+    let gh_data: serde_json::Value = resp.json().await.map_err(|e| {
+        (
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse { error: e.to_string() }),
+        )
+    })?;
+
+    let sha = gh_data["sha"].as_str().unwrap_or("");
+    let raw_content = gh_data["content"].as_str().unwrap_or("");
+    let decoded = base64::engine::general_purpose::STANDARD
+        .decode(raw_content)
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse {
+                    error: format!("Failed to decode manifest: {}", e),
+                }),
+            )
+        })?;
+
+    let mut manifest: serde_json::Value = serde_json::from_slice(&decoded).map_err(|e| {
+        (
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to parse manifest: {}", e),
+            }),
+        )
+    })?;
+
+    // Remove the file entry
+    if let Some(files) = manifest["files"].as_array_mut() {
+        files.retain(|f| f["path"] != path);
+    }
+
+    let manifest_json = serde_json::to_string(&manifest).map_err(|e| {
+        (
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to stringify manifest: {}", e),
+            }),
+        )
+    })?;
+
+    let new_content = base64::engine::general_purpose::STANDARD.encode(&manifest_json);
+
+    let put_payload = serde_json::json!({
+        "message": format!("Remove {} from manifest", path),
+        "content": new_content,
+        "sha": sha,
+    });
+
+    let put_resp = state
+        .client
+        .put(gh_url("manifest.json"))
+        .header("Authorization", format!("Bearer {}", state.github_token))
+        .header("User-Agent", "kd-backend/0.1")
+        .json(&put_payload)
+        .send()
+        .await
+        .map_err(|e| {
+            (
+                StatusCode::BAD_GATEWAY,
+                Json(ErrorResponse { error: e.to_string() }),
+            )
+        })?;
+
+    if !put_resp.status().is_success() {
+        let status = put_resp.status();
+        let text = put_resp.text().await.unwrap_or_default();
+        return Err((
+            StatusCode::BAD_GATEWAY,
+            Json(ErrorResponse {
+                error: format!("Failed to save manifest ({}): {}", status, text),
+            }),
+        ));
+    }
+
+    Ok(())
 }
 
 const MAX_CONTENTS_SIZE: usize = 1_000_000; // 1MB — GitHub Contents API limit
