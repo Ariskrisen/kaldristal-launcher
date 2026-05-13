@@ -567,8 +567,11 @@
                     });
 
                     if (!resp.ok) {
-                        const err = await resp.json();
-                        throw new Error(err.error || 'Upload failed');
+                        const errText = await resp.text();
+                        let errMsg;
+                        try { const j = JSON.parse(errText); errMsg = j.error || errText; } catch { errMsg = errText; }
+                        if (resp.status === 413) errMsg += ' (файл слишком большой, макс ~1MB)';
+                        throw new Error(errMsg);
                     }
 
                     manifest.files = manifest.files.filter(f => f.path !== relPath);

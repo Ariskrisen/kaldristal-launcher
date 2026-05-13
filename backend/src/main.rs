@@ -1,5 +1,5 @@
 use axum::{
-    extract::{Query, State},
+    extract::{DefaultBodyLimit, Query, State},
     http::StatusCode,
     response::{Html, IntoResponse},
     routing::get,
@@ -439,6 +439,7 @@ async fn main() {
         .route("/admin", get(handle_admin))
         .route("/admin/", get(handle_admin))
         .layer(CorsLayer::permissive())
+        .layer(DefaultBodyLimit::max(10 * 1024 * 1024))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind(&bind).await.unwrap();
