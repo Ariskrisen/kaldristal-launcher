@@ -4,6 +4,7 @@
   "modloader": "forge",
   "modloader_version": "47.4.0",
   "base_url": "https://raw.githubusercontent.com/Ariskrisen/kaldristal-launcher/master/",
+  "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/TAG/",
   "files": [
     {
       "path": "config/accessories.json5",
