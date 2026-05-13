@@ -578,7 +578,7 @@
 
         async function handleDrop(items) {
             const files = [];
-            const base = currentFolder ? currentFolder + '/' : '';
+            const base = currentFolder ? currentFolder : '';
             for (const item of items) {
                 const entry = item.webkitGetAsEntry();
                 if (entry) await traverseEntry(entry, base, files);
