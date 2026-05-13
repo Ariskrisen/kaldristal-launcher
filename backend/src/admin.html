@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KalDristal — Admin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #181818;
+            --bg-secondary: #242424;
+            --bg-tertiary: #2e2e2e;
+            --border: #3a3a3a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --accent: #5a5a5a;
+            --error: #f87171;
+            --success: #4ade80;
+            --radius: 6px;
+            --font: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            font-family: var(--font);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            font-size: 14px;
+        }
+        .sidebar {
+            width: 240px; background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; flex-shrink: 0;
+            position: sticky; top: 0; height: 100vh;
+        }
+        .sidebar-header {
+            padding: 10px 12px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 12px; font-weight: 500; color: var(--text-secondary); letter-spacing: 1px; }
+        .btn-add-folder {
+            width: 24px; height: 24px; background: transparent;
+            border: 1px solid var(--border); color: var(--text-secondary);
+            border-radius: 4px; cursor: pointer; font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-add-folder:hover { border-color: var(--accent); color: var(--text-primary); }
+        .folder-list { flex: 1; overflow-y: auto; padding: 4px; }
+        .folder-item {
+            display: flex; align-items: center; padding: 6px 10px;
+            border-radius: 4px; cursor: pointer; color: var(--text-secondary);
+            font-size: 12px; transition: all 0.15s;
+        }
+        .folder-item:hover, .folder-item.active { background: var(--bg-tertiary); color: var(--text-primary); }
+        .folder-toggle { cursor: pointer; width: 14px; font-size: 10px; color: var(--text-secondary); margin-right: 2px; }
+        .folder-icon { cursor: pointer; margin-right: 2px; }
+        .folder-name { cursor: pointer; flex: 1; }
+        .folder-count { margin-left: auto; font-size: 11px; color: var(--text-muted); }
+        .sidebar-footer { padding: 12px; border-top: 1px solid var(--border); }
+        .sidebar-info { font-size: 11px; color: var(--text-secondary); padding: 6px 0 10px 0; word-break: break-all; }
+        .btn-logout {
+            width: 100%; padding: 8px; background: transparent;
+            border: 1px solid var(--border); color: var(--text-secondary);
+            border-radius: 4px; cursor: pointer; font-size: 12px;
+        }
+        .btn-logout:hover { border-color: var(--error); color: var(--error); }
+        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .main-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--bg-secondary);
+        }
+        .current-folder { font-size: 14px; font-weight: 500; }
+        .current-path { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .header-actions { display: flex; gap: 8px; }
+        .btn {
+            padding: 8px 14px; background: var(--bg-tertiary);
+            border: 1px solid var(--border); color: var(--text-primary);
+            border-radius: 4px; cursor: pointer; font-size: 12px; transition: all 0.15s;
+        }
+        .btn:hover { border-color: var(--accent); }
+        .btn-primary { background: var(--text-primary); color: var(--bg-primary); border-color: var(--text-primary); }
+        .btn-primary:hover { background: #ffffff; }
+        .drop-zone {
+            margin: 12px 20px; padding: 20px;
+            border: 2px dashed var(--border); border-radius: var(--radius);
+            text-align: center; color: var(--text-secondary); font-size: 12px; transition: all 0.15s;
+        }
+        .drop-zone.dragover { border-color: var(--accent); background: rgba(90,90,90,0.1); }
+        .drop-zone.hidden { display: none; }
+        .file-table { flex: 1; overflow-y: auto; padding: 0 20px 12px; }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 500;
+            color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: var(--bg-primary);
+        }
+        td { padding: 6px 12px; border-bottom: 1px solid var(--border); font-size: 12px; }
+        tr:hover { background: var(--bg-secondary); }
+        .file-name { display: flex; align-items: center; gap: 8px; }
+        .file-icon { color: var(--text-secondary); }
+        .file-size { color: var(--text-secondary); }
+        .btn-delete {
+            padding: 2px 6px; background: transparent; border: 1px solid var(--border);
+            color: var(--error); border-radius: 4px; cursor: pointer; font-size: 12px;
+        }
+        .btn-delete:hover { background: var(--error); border-color: var(--error); color: white; }
+        .loading { text-align: center; padding: 40px; color: var(--text-secondary); }
+        .status-msg {
+            padding: 12px 16px; margin: 20px; border-radius: 4px; font-size: 13px; display: none;
+        }
+        .status-msg.show { display: block; }
+        .status-msg.error { background: rgba(248,113,113,0.1); border: 1px solid var(--error); color: var(--error); }
+        .status-msg.success { background: rgba(74,222,128,0.1); border: 1px solid var(--success); color: var(--success); }
+        .hidden { display: none !important; }
+        input[type="file"] { display: none; }
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center; z-index: 100;
+        }
+        .modal.hidden { display: none; }
+        .modal-content { background: var(--bg-secondary); border-radius: var(--radius); padding: 20px; width: 340px; }
+        .modal-title { font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+        .modal input[type="text"], .modal input[type="password"] {
+            width: 100%; padding: 10px 12px; background: var(--bg-primary);
+            border: 1px solid var(--border); border-radius: 4px; color: var(--text-primary);
+            font-size: 13px; outline: none; margin-bottom: 12px;
+        }
+        .modal input:focus { border-color: var(--accent); }
+        .modal-buttons { display: flex; gap: 8px; }
+        .modal-buttons .btn { flex: 1; }
+        .setup-hint {
+            font-size: 11px; color: var(--text-secondary);
+            margin-bottom: 14px; line-height: 1.5;
+        }
+        .setup-hint b { color: var(--accent); }
+        .test-result {
+            font-size: 12px; margin-bottom: 12px; padding: 8px 10px;
+            border-radius: 4px; display: none;
+        }
+        .test-result.ok { display: block; background: rgba(74,222,128,0.1); border: 1px solid var(--success); color: var(--success); }
+        .test-result.fail { display: block; background: rgba(248,113,113,0.1); border: 1px solid var(--error); color: var(--error); }
+        .modal .input-group { margin-bottom: 10px; }
+        .modal .input-group:last-of-type { margin-bottom: 12px; }
+        .modal .input-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+        .empty-folder { text-align: center; padding: 40px; color: var(--text-secondary); }
+        .folder-row:hover { background: var(--bg-tertiary) !important; }
+        @keyframes fade-highlight {
+            0% { background: rgba(74,222,128,0.35); }
+            70% { background: rgba(74,222,128,0.35); }
+            100% { background: transparent; }
+        }
+        tr.row-new { animation: fade-highlight 18s ease-out forwards; }
+        .upload-count { font-size: 12px; color: var(--text-secondary); padding: 6px 20px; display: none; }
+        .upload-count.show { display: block; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ПАПКИ</div>
+            <button class="btn-add-folder" onclick="showNewFolderModal()" title="Создать папку">+</button>
+        </div>
+        <div class="folder-list" id="folder-list"></div>
+        <div class="sidebar-footer">
+            <div class="sidebar-info" id="sidebar-info"></div>
+            <button class="btn-logout" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main-header">
+            <div>
+                <div class="current-folder" id="current-folder">Файлы</div>
+                <div class="current-path" id="current-path">/</div>
+            </div>
+            <div class="header-actions">
+                <button class="btn" onclick="showMetadataModal()">Версия</button>
+                <button class="btn" onclick="repairPaths()" title="Починить пути с кракозябрами">🔧</button>
+                <button class="btn" onclick="document.getElementById('file-input').click()">+ Загрузить</button>
+            </div>
+        </div>
+
+        <div id="status" class="status-msg"></div>
+
+        <div class="drop-zone" id="drop-zone">
+            Перетащи файлы сюда или нажми "Загрузить"
+        </div>
+
+        <div class="upload-count" id="upload-count"></div>
+        <div class="file-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Размер</th>
+                        <th style="width: 60px;"></th>
+                    </tr>
+                </thead>
+                <tbody id="file-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="setup-modal">
+        <div class="modal-content">
+            <div class="modal-title">Подключение к серверу</div>
+            <input type="text" id="backend-url" placeholder="https://example.com:3000">
+            <input type="password" id="auth-token" placeholder="Токен авторизации (если нужен)">
+            <div class="setup-hint">
+                Укажите URL бэкенд-сервера. Токен — опционально, если сервер требует авторизацию.
+            </div>
+            <div class="test-result" id="test-result"></div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="testConnection()">Проверить</button>
+                <button class="btn btn-primary" onclick="saveSetup()">Подключить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="new-folder-modal">
+        <div class="modal-content">
+            <div class="modal-title">Новая папка</div>
+            <input type="text" id="new-folder-name" placeholder="Имя папки">
+            <div class="modal-buttons">
+                <button class="btn" onclick="hideNewFolderModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="createFolder()">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+
+    <div class="modal hidden" id="metadata-modal">
+        <div class="modal-content">
+            <div class="modal-title">Метаданные сборки</div>
+            <div class="input-group">
+                <label>Версия сборки</label>
+                <input type="text" id="meta-version" placeholder="1.0.0">
+            </div>
+            <div class="input-group">
+                <label>Minecraft</label>
+                <input type="text" id="meta-minecraft" placeholder="1.20.1">
+            </div>
+            <div class="input-group">
+                <label>Modloader</label>
+                <input type="text" id="meta-modloader" placeholder="forge">
+            </div>
+            <div class="input-group">
+                <label>Версия modloader</label>
+                <input type="text" id="meta-modloader-version" placeholder="47.3.0">
+            </div>
+            <div class="input-group">
+                <label>Base URL (для файлов &le;50MB: raw.githubusercontent.com)</label>
+                <input type="text" id="meta-base-url" placeholder="https://raw.githubusercontent.com/...">
+            </div>
+            <div class="input-group">
+                <label>Download Base URL (для файлов >50MB: GitHub Releases)</label>
+                <input type="text" id="meta-download-base" placeholder="https://github.com/.../releases/download/v1.0.0/">
+            </div>
+            <div class="input-group">
+                <label>IP сервера (опционально)</label>
+                <input type="text" id="meta-server-ip" placeholder="play.example.com">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="hideMetadataModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="saveMetadata()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let BACKEND_URL = '';
+        let AUTH_TOKEN = '';
+        let manifest = { files: [] };
+        let currentFolder = '';
+        const newFiles = new Set();
+
+        function api(path) {
+            return BACKEND_URL + '/api' + path;
+        }
+
+        function authHeaders(extra) {
+            const h = { 'Content-Type': 'application/json', ...(extra || {}) };
+            if (AUTH_TOKEN) h['Authorization'] = 'Bearer ' + AUTH_TOKEN;
+            return h;
+        }
+
+        async function testConnection() {
+            const url = document.getElementById('backend-url').value.trim();
+            const token = document.getElementById('auth-token').value.trim();
+            const el = document.getElementById('test-result');
+            if (!url) { el.className = 'test-result fail'; el.textContent = 'Укажите URL сервера'; return; }
+
+            try {
+                const resp = await fetch(url + '/api/check', {
+                    headers: token ? { 'Authorization': 'Bearer ' + token } : {}
+                });
+                const data = await resp.json();
+                if (data.ok) {
+                    el.className = 'test-result ok';
+                    el.textContent = '✅ Подключено: ' + (data.repo || 'OK');
+                } else {
+                    el.className = 'test-result fail';
+                    el.textContent = '❌ ' + (data.error || 'Ошибка подключения');
+                }
+            } catch (e) {
+                el.className = 'test-result fail';
+                el.textContent = '❌ Ошибка соединения: ' + e.message;
+            }
+        }
+
+        function saveSetup() {
+            BACKEND_URL = document.getElementById('backend-url').value.trim().replace(/\/+$/, '');
+            AUTH_TOKEN = document.getElementById('auth-token').value.trim();
+            if (!BACKEND_URL) return alert('Укажите URL сервера');
+
+            localStorage.setItem('kd_backend', BACKEND_URL);
+            localStorage.setItem('kd_auth', AUTH_TOKEN);
+
+            document.getElementById('test-result').className = 'test-result';
+            document.getElementById('setup-modal').classList.add('hidden');
+            initDashboard();
+        }
+
+        function logout() {
+            localStorage.removeItem('kd_backend');
+            localStorage.removeItem('kd_auth');
+            location.reload();
+        }
+
+        async function initDashboard() {
+            BACKEND_URL = localStorage.getItem('kd_backend');
+            AUTH_TOKEN = localStorage.getItem('kd_auth') || '';
+
+            if (!BACKEND_URL) {
+                document.getElementById('setup-modal').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('sidebar-info').textContent = BACKEND_URL;
+            await loadManifest();
+            renderFolders();
+        }
+
+        async function loadManifest() {
+            try {
+                const resp = await fetch(api('/manifest'), { headers: authHeaders() });
+                const data = await resp.json();
+
+                if (data.content) {
+                    manifest = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+                    manifest.sha = data.sha;
+                } else {
+                    manifest = { version: "1.0.0", files: [] };
+                }
+            } catch (e) {
+                showStatus('Ошибка загрузки: ' + e.message, 'error');
+            }
+        }
+
+        function buildFolderTree() {
+            const tree = {};
+            manifest.files.forEach(f => {
+                const parts = f.path.split('/');
+                let current = tree;
+                parts.forEach((part, i) => {
+                    if (i === parts.length - 1) return;
+                    if (!current[part]) current[part] = { _files: 0, _subs: {} };
+                    current[part]._files++;
+                    current = current[part]._subs;
+                });
+            });
+            return tree;
+        }
+
+        function renderFolders(activeFolder, parentPath = '') {
+            const list = document.getElementById('folder-list');
+            const tree = buildFolderTree();
+            list.innerHTML = '';
+            const expandedPaths = new Set();
+
+            function renderLevel(node, path, level = 0) {
+                Object.keys(node).sort().forEach(name => {
+                    if (name.startsWith('_')) return;
+                    const fullPath = path ? path + '/' + name : name;
+                    const hasSubs = Object.keys(node[name]._subs).length > 0;
+                    const div = document.createElement('div');
+                    div.className = 'folder-item ' + (fullPath === currentFolder ? 'active' : '');
+                    div.style.paddingLeft = (10 + level * 16) + 'px';
+                    div.innerHTML =
+                        '<span class="folder-icon" onclick="selectFolder(\'' + fullPath + '\')">' + (hasSubs ? '📂' : '📁') + '</span>' +
+                        '<span class="folder-name" onclick="selectFolder(\'' + fullPath + '\')">' + escapeHtml(name) + '</span>' +
+                        '<span class="folder-count">' + node[name]._files + '</span>';
+                    list.appendChild(div);
+                });
+            }
+
+            renderLevel(tree, '', 0);
+
+            if (!currentFolder) {
+                const first = list.querySelector('.folder-item');
+                if (first) {
+                    const name = first.querySelector('.folder-name').textContent;
+                    selectFolder(name);
+                }
+            } else {
+                selectFolder(currentFolder);
+            }
+        }
+
+        function getFilesInFolder(folder) {
+            return manifest.files.filter(f => {
+                const parts = f.path.split('/');
+                return parts[0] === folder;
+            });
+        }
+
+        function selectFolder(folder) {
+            currentFolder = folder;
+            document.getElementById('current-folder').textContent = folder;
+            document.getElementById('current-path').textContent = '/' + folder + '/';
+            document.querySelectorAll('.folder-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.folder-item').forEach(el => {
+                if (el.textContent.includes(folder)) el.classList.add('active');
+            });
+            renderFiles();
+        }
+
+        function escapeHtml(s) {
+            const d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        function renderFiles() {
+            const body = document.getElementById('file-body');
+            const prefix = currentFolder ? currentFolder + '/' : '';
+            const files = manifest.files.filter(f => f.path.startsWith(prefix));
+            body.innerHTML = '';
+
+            if (files.length === 0) {
+                body.innerHTML = '<tr><td colspan="3" class="empty-folder">Папка пуста</td></tr>';
+                return;
+            }
+
+            const subFolders = new Set();
+            files.forEach(file => {
+                const relPath = file.path.substring(prefix.length);
+                const parts = relPath.split('/');
+                if (parts.length > 1) subFolders.add(parts[0]);
+            });
+
+            Array.from(subFolders).sort().forEach(folder => {
+                const tr = document.createElement('tr');
+                tr.className = 'folder-row';
+                tr.innerHTML = '<td><div class="file-name"><span class="file-icon">📂</span><span>' + escapeHtml(folder) + '/</span></div></td><td class="file-size">—</td><td></td>';
+                tr.style.cursor = 'pointer';
+                tr.onclick = () => selectFolder(currentFolder ? currentFolder + '/' + folder : folder);
+                body.appendChild(tr);
+            });
+
+            files.forEach(file => {
+                const relPath = file.path.substring(prefix.length);
+                const parts = relPath.split('/');
+                if (parts.length > 1) return;
+                const tr = document.createElement('tr');
+                if (newFiles.has(file.path)) tr.className = 'row-new';
+                tr.innerHTML = '<td><div class="file-name"><span class="file-icon">📄</span><span>' + escapeHtml(relPath) + '</span></div></td>' +
+                    '<td class="file-size">' + formatSize(file.size) + '</td>' +
+                    '<td><button class="btn-delete" onclick="deleteFile(\'' + escapeHtml(file.path) + '\')">×</button></td>';
+                body.appendChild(tr);
+            });
+        }
+
+        function fixGarbledPath(str) {
+            try {
+                const d = new TextDecoder();
+                let prev = str;
+                for (let pass = 0; pass < 3; pass++) {
+                    const bytes = new Uint8Array(prev.length);
+                    let allAscii = true;
+                    for (let i = 0; i < prev.length; i++) {
+                        const c = prev.charCodeAt(i);
+                        if (c > 255) return prev;
+                        if (c > 127) allAscii = false;
+                        bytes[i] = c;
+                    }
+                    if (allAscii) return prev;
+                    const next = d.decode(bytes);
+                    if (next === prev) return prev;
+                    prev = next;
+                }
+                return prev;
+            } catch { return str; }
+        }
+
+        function repairPaths() {
+            let fixed = 0;
+            manifest.files.forEach(f => {
+                const repaired = fixGarbledPath(f.path);
+                if (repaired !== f.path) { f.path = repaired; fixed++; }
+            });
+            if (fixed > 0) {
+                renderFiles();
+                renderFolders(currentFolder);
+                showStatus('Починено ' + fixed + ' путей. Нажми "Версия" → Сохранить, чтобы записать в GitHub', 'success');
+            } else {
+                showStatus('Кракозябр не найдено', 'success');
+            }
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        async function deleteFile(path) {
+            if (!confirm('Удалить ' + path + '?')) return;
+            try {
+                const resp = await fetch(api('/file?path=' + encodeURIComponent(path)), {
+                    method: 'DELETE',
+                    headers: authHeaders()
+                });
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    throw new Error(err.error || 'Delete failed');
+                }
+                manifest.files = manifest.files.filter(f => f.path !== path);
+                await saveManifest();
+                renderFolders(currentFolder);
+                showStatus('Файл удален', 'success');
+            } catch (e) {
+                showStatus('Ошибка: ' + e.message, 'error');
+            }
+        }
+
+        async function handleFiles(files) {
+            let ok = 0, fail = 0;
+            const countEl = document.getElementById('upload-count');
+
+            for (const file of files) {
+                try {
+                    const relPath = file.fullPath || (currentFolder + '/' + file.name);
+                    const content = await readFileAsBase64(file);
+                    const hash = await calculateSHA256(file);
+
+                    const resp = await fetch(api('/file?path=' + encodeURIComponent(relPath)), {
+                        method: 'PUT',
+                        headers: authHeaders(),
+                        body: JSON.stringify({ content: content, message: 'Upload ' + relPath }),
+                    });
+
+                    if (!resp.ok) {
+                        const err = await resp.json();
+                        throw new Error(err.error || 'Upload failed');
+                    }
+
+                    manifest.files = manifest.files.filter(f => f.path !== relPath);
+                    manifest.files.push({ path: relPath, sha256: hash, size: file.size });
+                    newFiles.add(relPath);
+                    setTimeout(() => { newFiles.delete(relPath); renderFiles(); }, 18000);
+                    ok++;
+                } catch (e) {
+                    fail++;
+                    console.error('Ошибка ' + file.name + ':', e);
+                }
+            }
+
+            await saveManifest();
+            renderFolders(currentFolder);
+
+            if (ok > 0) {
+                countEl.textContent = '✅ Загружено: ' + ok + (fail > 0 ? ', ошибок: ' + fail : '');
+                countEl.className = 'upload-count show';
+                setTimeout(() => countEl.classList.remove('show'), 4000);
+            } else if (files.length > 0) {
+                countEl.textContent = '❌ Не удалось загрузить файлы. Проверьте сервер.';
+                countEl.className = 'upload-count show';
+                setTimeout(() => countEl.classList.remove('show'), 6000);
+            }
+
+            document.getElementById('file-input').value = '';
+        }
+
+        async function saveManifest() {
+            manifest.files.sort((a, b) => a.path.localeCompare(b.path));
+            const sha = manifest.sha;
+            delete manifest.sha;
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2))));
+
+            const resp = await fetch(api('/manifest'), {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ content: content, message: 'Update manifest' }),
+            });
+
+            if (!resp.ok) {
+                const err = await resp.text();
+                manifest.sha = sha;
+                let msg;
+                try { const j = JSON.parse(err); msg = j.error || err; } catch { msg = err; }
+                throw new Error('Ошибка сохранения manifest: ' + msg);
+            }
+
+            const data = await resp.json();
+            manifest.sha = data.content && data.content.sha;
+        }
+
+        function showNewFolderModal() {
+            document.getElementById('new-folder-modal').classList.remove('hidden');
+            document.getElementById('new-folder-name').focus();
+        }
+
+        function hideNewFolderModal() {
+            document.getElementById('new-folder-modal').classList.add('hidden');
+            document.getElementById('new-folder-name').value = '';
+        }
+
+        function showMetadataModal() {
+            document.getElementById('meta-version').value = manifest.version || '';
+            document.getElementById('meta-minecraft').value = manifest.minecraft_version || '';
+            document.getElementById('meta-modloader').value = manifest.modloader || '';
+            document.getElementById('meta-modloader-version').value = manifest.modloader_version || '';
+            document.getElementById('meta-base-url').value = manifest.base_url || '';
+            document.getElementById('meta-download-base').value = manifest.download_base || '';
+            document.getElementById('meta-server-ip').value = manifest.server_ip || '';
+            document.getElementById('metadata-modal').classList.remove('hidden');
+        }
+
+        function hideMetadataModal() {
+            document.getElementById('metadata-modal').classList.add('hidden');
+        }
+
+        async function saveMetadata() {
+            manifest.version = document.getElementById('meta-version').value;
+            manifest.minecraft_version = document.getElementById('meta-minecraft').value;
+            manifest.modloader = document.getElementById('meta-modloader').value;
+            manifest.modloader_version = document.getElementById('meta-modloader-version').value;
+            manifest.base_url = document.getElementById('meta-base-url').value;
+            manifest.download_base = document.getElementById('meta-download-base').value || undefined;
+            manifest.server_ip = document.getElementById('meta-server-ip').value || undefined;
+
+            await saveManifest();
+            hideMetadataModal();
+            showStatus('Метаданные сохранены', 'success');
+        }
+
+        async function createFolder() {
+            const name = document.getElementById('new-folder-name').value.trim();
+            if (!name) return;
+            hideNewFolderModal();
+
+            const fullPath = currentFolder ? currentFolder + '/' + name : name;
+            const dummy = new Blob([''], { type: 'text/plain' });
+            dummy.name = '.gitkeep';
+
+            const content = await readFileAsBase64(dummy);
+            const hash = await calculateSHA256(dummy);
+
+            try {
+                const resp = await fetch(api('/file?path=' + encodeURIComponent(fullPath + '/.gitkeep')), {
+                    method: 'PUT',
+                    headers: authHeaders(),
+                    body: JSON.stringify({ content: content, message: 'Create folder ' + fullPath }),
+                });
+
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    throw new Error(err.error || 'Create failed');
+                }
+
+                manifest.files.push({ path: fullPath + '/.gitkeep', sha256: hash, size: 0 });
+                await saveManifest();
+                renderFolders(fullPath);
+                showStatus('Папка создана', 'success');
+            } catch (e) {
+                showStatus('Ошибка: ' + e.message, 'error');
+            }
+        }
+
+        function showStatus(msg, type) {
+            const s = document.getElementById('status');
+            s.textContent = msg;
+            s.className = 'status-msg show ' + type;
+            setTimeout(() => s.classList.remove('show'), 3000);
+        }
+
+        function readFileAsBase64(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function calculateSHA256(file) {
+            const buffer = await file.arrayBuffer();
+            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        const dropZone = document.getElementById('drop-zone');
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>

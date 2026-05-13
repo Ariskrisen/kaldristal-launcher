@@ -1,7 +1,7 @@
 use axum::{
     extract::{Query, State},
     http::StatusCode,
-    response::IntoResponse,
+    response::{Html, IntoResponse},
     routing::get,
     Json, Router,
 };
@@ -398,6 +398,10 @@ async fn get_file_sha(state: &AppState, path: &str) -> Option<String> {
     data["sha"].as_str().map(|s| s.to_string())
 }
 
+async fn handle_admin() -> Html<&'static str> {
+    Html(include_str!("admin.html"))
+}
+
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -431,6 +435,9 @@ async fn main() {
         .route("/api/check", get(handle_check))
         .route("/api/manifest", get(handle_get_manifest).put(handle_put_manifest))
         .route("/api/file", get(handle_get_file).put(handle_put_file).delete(handle_delete_file))
+        .route("/", get(handle_admin))
+        .route("/admin", get(handle_admin))
+        .route("/admin/", get(handle_admin))
         .layer(CorsLayer::permissive())
         .with_state(state);
 
