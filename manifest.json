@@ -5397,11 +5397,6 @@
       "size": 40739
     },
     {
-      "path": "kubejs/client_scripts/main.js",
-      "sha256": "59e4f5a60ae15d268f7feb8999b8b268a13482d480479163951a831668e3a8d9",
-      "size": 3138
-    },
-    {
       "path": "kubejs/config/client.properties",
       "sha256": "00a2f883d6829e6f451e7ee96b25d7d53822f0f2abb4650aae812118d4f141b3",
       "size": 375
