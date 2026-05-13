@@ -154,6 +154,9 @@
         tr.row-new { animation: fade-highlight 18s ease-out forwards; }
         .upload-count { font-size: 12px; color: var(--text-secondary); padding: 6px 20px; display: none; }
         .upload-count.show { display: block; }
+        .search-bar { padding: 8px 20px; }
+        .search-bar input { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-primary); color: var(--text); outline: none; box-sizing: border-box; }
+        .search-bar input:focus { border-color: var(--accent); }
     </style>
 </head>
 <body>
@@ -189,6 +192,9 @@
         </div>
 
         <div class="upload-count" id="upload-count"></div>
+        <div class="search-bar">
+            <input type="text" id="file-search" placeholder="Поиск файлов..." oninput="renderFiles()">
+        </div>
         <div class="file-table">
             <table>
                 <thead>
@@ -274,7 +280,7 @@
         let BACKEND_URL = '';
         let AUTH_TOKEN = '';
         let manifest = { files: [] };
-        let currentFolder = '';
+        let currentFolder = localStorage.getItem('kd_current_folder') || '';
         const newFiles = new Set();
 
         function api(path) {
@@ -406,6 +412,23 @@
                         '<span class="folder-icon" onclick="selectFolder(\'' + fullPath + '\')">' + (hasSubs ? '📂' : '📁') + '</span>' +
                         '<span class="folder-name" onclick="selectFolder(\'' + fullPath + '\')">' + escapeHtml(name) + '</span>' +
                         '<span class="folder-count">' + node[name]._files + '</span>';
+                    div.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        div.style.outline = '2px dashed var(--accent)';
+                    });
+                    div.addEventListener('dragleave', () => {
+                        div.style.outline = '';
+                    });
+                    div.addEventListener('drop', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        div.style.outline = '';
+                        if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+                            selectFolder(fullPath);
+                            await handleDrop(e.dataTransfer.items);
+                            renderFolders(currentFolder);
+                        }
+                    });
                     list.appendChild(div);
                 });
             }
@@ -432,6 +455,7 @@
 
         function selectFolder(folder) {
             currentFolder = folder;
+            localStorage.setItem('kd_current_folder', folder);
             document.getElementById('current-folder').textContent = folder;
             document.getElementById('current-path').textContent = '/' + folder + '/';
             document.querySelectorAll('.folder-item').forEach(el => el.classList.remove('active'));
@@ -450,7 +474,12 @@
         function renderFiles() {
             const body = document.getElementById('file-body');
             const prefix = currentFolder ? currentFolder + '/' : '';
-            const files = manifest.files.filter(f => f.path.startsWith(prefix));
+            const search = (document.getElementById('file-search')?.value || '').toLowerCase();
+            const files = manifest.files.filter(f => {
+                if (!f.path.startsWith(prefix)) return false;
+                if (search && !f.path.toLowerCase().includes(search)) return false;
+                return true;
+            });
             body.innerHTML = '';
 
             if (files.length === 0) {
