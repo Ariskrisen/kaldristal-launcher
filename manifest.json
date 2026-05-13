@@ -2,9 +2,8 @@
   "version": "1.0.0",
   "minecraft_version": "1.20.1",
   "modloader": "forge",
-  "modloader_version": "47.4.0",
-  "base_url": "https://raw.githubusercontent.com/Ariskrisen/kaldristal-launcher/master/",
-  "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.0/",
+  "modloader_version": "47.3.0",
+  "base_url": "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/modpack/",
   "files": [
     {
       "path": "config/accessories.json5",
@@ -5887,7 +5886,7 @@
       "size": 363044
     },
     {
-      "path": "mods/Dungeon Now Loading-forge-1.20.1-2.0.jar",
+      "path": "mods/Dungeon.Now.Loading-forge-1.20.1-2.0.jar",
       "sha256": "0f2f4099184cd4c246ad816f12881ab7eeb2bc16ad6026dfd2ffe321399ffef6",
       "size": 65549930
     },
@@ -6160,11 +6159,6 @@
       "path": "mods/GuardRibbits-1.20.1-Forge-1.0.7.jar",
       "sha256": "04d1dd24d82ce5a09139fd5568383616b9f3bbc43742d820b077f39c5634def2",
       "size": 45714
-    },
-    {
-      "path": "mods/guardvillagers-1.20.1-1.6.17.jar",
-      "sha256": "3e63e9adb1cd273ce9881593c64b513477ebefeceb6b11f29a09b2237a422ace",
-      "size": 204742
     },
     {
       "path": "mods/hearth_and_home-forge-1.20.1-2.0.1.jar",
@@ -6827,6 +6821,11 @@
       "size": 40563
     },
     {
+      "path": "mods/Simply_Create_Model｜简单动力-mod-1.20.1-1.0.1.jar",
+      "sha256": "3ed30fe353bb94df8c21d4a659175f8e15a992479bfe84461c7052f1b743d78a",
+      "size": 1298614
+    },
+    {
       "path": "mods/sleep_tight-1.20-1.1.19.jar",
       "sha256": "d628879aefff996188de7077e3d2cef5d9f93717fad3d9fbe5f6f6e1e76a4ede",
       "size": 735748
@@ -6960,11 +6959,6 @@
       "path": "mods/toms_storage-1.20-1.7.1.jar",
       "sha256": "08552be86f960111e501227707dc089c91b8a55f6c1be09baee188338576ff9b",
       "size": 520148
-    },
-    {
-      "path": "mods/trashslot-forge-1.20.1-15.1.5.jar",
-      "sha256": "24836ac5f005e0c9fa5acd05fa362bb37c2ce3f4f646f8075b11b00ed1616fab",
-      "size": 117983
     },
     {
       "path": "mods/TravelersTitles-1.20-Forge-4.0.2.jar",
@@ -7672,7 +7666,7 @@
       "size": 762
     },
     {
-      "path": "resourcepacks/Animation player no eye.zip",
+      "path": "resourcepacks/Анимации игрока без глаз.zip",
       "sha256": "71763eef0ca9bb67e675175ea6a19923f7f501239b3945cf7d90a3703dece964",
       "size": 250762
     },
