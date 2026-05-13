@@ -344,6 +344,22 @@ async fn handle_put_file(
             Err(e) => return e.into_response(),
         };
 
+        // Delete existing asset with same name before uploading
+        if let Some(asset_id) = find_asset_id(&release, file_name) {
+            let del_url = format!(
+                "https://api.github.com/repos/{}/releases/assets/{}",
+                get_repo(),
+                asset_id
+            );
+            let _ = state
+                .client
+                .delete(&del_url)
+                .header("Authorization", format!("Bearer {}", state.github_token))
+                .header("User-Agent", "kd-backend/0.1")
+                .send()
+                .await;
+        }
+
         let download_url = match upload_asset(&state, &release, file_name, raw_bytes).await {
             Ok(u) => u,
             Err(e) => return e.into_response(),
@@ -753,6 +769,17 @@ async fn upload_asset(
             }),
         ))
     }
+}
+
+fn find_asset_id(release: &serde_json::Value, name: &str) -> Option<i64> {
+    let assets = release["assets"].as_array()?;
+    assets.iter().find_map(|a| {
+        if a["name"].as_str() == Some(name) {
+            a["id"].as_i64()
+        } else {
+            None
+        }
+    })
 }
 
 fn urlencode(s: &str) -> String {
