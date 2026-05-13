@@ -287,6 +287,18 @@
             return h;
         }
 
+        async function fetchWithRetry(url, opts, retries = 3, delay = 3000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const resp = await fetch(url, opts);
+                    return resp;
+                } catch (e) {
+                    if (i === retries - 1) throw e;
+                    await new Promise(r => setTimeout(r, delay));
+                }
+            }
+        }
+
         async function testConnection() {
             const url = document.getElementById('backend-url').value.trim();
             const token = document.getElementById('auth-token').value.trim();
@@ -294,7 +306,7 @@
             if (!url) { el.className = 'test-result fail'; el.textContent = 'Укажите URL сервера'; return; }
 
             try {
-                const resp = await fetch(url + '/api/check', {
+                const resp = await fetchWithRetry(url + '/api/check', {
                     headers: token ? { 'Authorization': 'Bearer ' + token } : {}
                 });
                 const data = await resp.json();
@@ -346,7 +358,7 @@
 
         async function loadManifest() {
             try {
-                const resp = await fetch(api('/manifest'), { headers: authHeaders() });
+                const resp = await fetchWithRetry(api('/manifest'), { headers: authHeaders() });
                 const data = await resp.json();
 
                 if (data.content) {
@@ -520,7 +532,7 @@
         async function deleteFile(path) {
             if (!confirm('Удалить ' + path + '?')) return;
             try {
-                const resp = await fetch(api('/file?path=' + encodeURIComponent(path)), {
+                const resp = await fetchWithRetry(api('/file?path=' + encodeURIComponent(path)), {
                     method: 'DELETE',
                     headers: authHeaders()
                 });
@@ -547,7 +559,7 @@
                     const content = await readFileAsBase64(file);
                     const hash = await calculateSHA256(file);
 
-                    const resp = await fetch(api('/file?path=' + encodeURIComponent(relPath)), {
+                    const resp = await fetchWithRetry(api('/file?path=' + encodeURIComponent(relPath)), {
                         method: 'PUT',
                         headers: authHeaders(),
                         body: JSON.stringify({ content: content, message: 'Upload ' + relPath }),
@@ -661,7 +673,7 @@
             const hash = await calculateSHA256(dummy);
 
             try {
-                const resp = await fetch(api('/file?path=' + encodeURIComponent(fullPath + '/.gitkeep')), {
+                const resp = await fetchWithRetry(api('/file?path=' + encodeURIComponent(fullPath + '/.gitkeep')), {
                     method: 'PUT',
                     headers: authHeaders(),
                     body: JSON.stringify({ content: content, message: 'Create folder ' + fullPath }),
