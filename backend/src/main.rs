@@ -43,7 +43,8 @@ struct ErrorResponse {
 }
 
 fn gh_url(path: &str) -> String {
-    format!("https://api.github.com/repos/{}/contents/{}", get_repo(), path)
+    let clean = path.trim_start_matches('/');
+    format!("https://api.github.com/repos/{}/contents/{}", get_repo(), clean)
 }
 
 fn get_repo() -> String {
