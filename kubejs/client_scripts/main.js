@@ -75,3 +75,90 @@ JEIEvents.hideItems(event => {
 JEIEvents.hideFluids(event => {
     event.hide('sophisticatedcore:xp_still')
 })
+
+JEIEvents.hideItems(event => {
+    // Список всех ID из лога
+    const ids = [
+        'backpacked:backpack',
+        'backpacked:acacia_backpack_shelf',
+        'backpacked:birch_backpack_shelf',
+        'backpacked:cherry_backpack_shelf',
+        'backpacked:crimson_backpack_shelf',
+        'backpacked:dark_oak_backpack_shelf',
+        'backpacked:jungle_backpack_shelf',
+        'backpacked:oak_backpack_shelf',
+        'backpacked:spruce_backpack_shelf',
+        'backpacked:warped_backpack_shelf',
+        'everycomp:bp/alexscaves/pewen_backpack_shelf',
+        'everycomp:bp/alexscaves/thornwood_backpack_shelf',
+        'everycomp:bp/arts_and_crafts/cork_backpack_shelf',
+        'everycomp:bp/atmospheric/aspen_backpack_shelf',
+        'everycomp:bp/atmospheric/grimwood_backpack_shelf',
+        'everycomp:bp/atmospheric/kousa_backpack_shelf',
+        'everycomp:bp/atmospheric/laurel_backpack_shelf',
+        'everycomp:bp/atmospheric/morado_backpack_shelf',
+        'everycomp:bp/atmospheric/rosewood_backpack_shelf',
+        'everycomp:bp/atmospheric/yucca_backpack_shelf',
+        'everycomp:bp/autumnity/maple_backpack_shelf',
+        'everycomp:bp/biomesoplenty/dead_backpack_shelf',
+        'everycomp:bp/biomesoplenty/fir_backpack_shelf',
+        'everycomp:bp/biomesoplenty/hellbark_backpack_shelf',
+        'everycomp:bp/biomesoplenty/jacaranda_backpack_shelf',
+        'everycomp:bp/biomesoplenty/magic_backpack_shelf',
+        'everycomp:bp/biomesoplenty/mahogany_backpack_shelf',
+        'everycomp:bp/biomesoplenty/palm_backpack_shelf',
+        'everycomp:bp/biomesoplenty/redwood_backpack_shelf',
+        'everycomp:bp/biomesoplenty/umbran_backpack_shelf',
+        'everycomp:bp/biomesoplenty/willow_backpack_shelf',
+        'everycomp:bp/caverns_and_chasms/azalea_backpack_shelf',
+        'everycomp:bp/ecologics/azalea_backpack_shelf',
+        'everycomp:bp/ecologics/coconut_backpack_shelf',
+        'everycomp:bp/ecologics/walnut_backpack_shelf',
+        'everycomp:bp/eidolon/illwood_backpack_shelf',
+        'everycomp:bp/endergetic/poise_backpack_shelf',
+        'everycomp:bp/environmental/pine_backpack_shelf',
+        'everycomp:bp/environmental/plum_backpack_shelf',
+        'everycomp:bp/environmental/willow_backpack_shelf',
+        'everycomp:bp/environmental/wisteria_backpack_shelf',
+        'everycomp:bp/gardens_of_the_dead/soulblight_backpack_shelf',
+        'everycomp:bp/minecells/putrid_backpack_shelf',
+        'everycomp:bp/netherexp/claret_backpack_shelf',
+        'everycomp:bp/quark/ancient_backpack_shelf',
+        'everycomp:bp/quark/azalea_backpack_shelf',
+        'everycomp:bp/quark/blossom_backpack_shelf',
+        'everycomp:bp/twilightforest/canopy_backpack_shelf',
+        'everycomp:bp/twilightforest/dark_backpack_shelf',
+        'everycomp:bp/twilightforest/mangrove_backpack_shelf',
+        'everycomp:bp/twilightforest/mining_backpack_shelf',
+        'everycomp:bp/twilightforest/sorting_backpack_shelf',
+        'everycomp:bp/twilightforest/time_backpack_shelf',
+        'everycomp:bp/twilightforest/transformation_backpack_shelf',
+        'everycomp:bp/twilightforest/twilight_oak_backpack_shelf',
+        'everycomp:bp/upgrade_aquatic/driftwood_backpack_shelf',
+        'everycomp:bp/upgrade_aquatic/river_backpack_shelf',
+        'everycomp:bp/vinery/dark_cherry_backpack_shelf'
+    ]
+    
+    ids.forEach(id => {
+        const stack = Item.of(id)
+        if (!stack.isEmpty()) {
+            event.hide(stack)
+        }
+    })
+    
+    // Зачарованные книги с зачарованиями backpacked
+    const enchants = [
+        'backpacked:funnelling',
+        'backpacked:imbued_hide',
+        'backpacked:looted',
+        'backpacked:marksman',
+        'backpacked:repairman'
+    ]
+    
+    enchants.forEach(id => {
+        const book = Item.of('minecraft:enchanted_book').enchant(id, 1)
+        if (!book.isEmpty()) {
+            event.hide(book)
+        }
+    })
+})
