@@ -157,6 +157,12 @@
         .search-bar { padding: 8px 20px; }
         .search-bar input { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-primary); color: var(--text); outline: none; box-sizing: border-box; }
         .search-bar input:focus { border-color: var(--accent); }
+        .upload-progress { padding: 4px 20px 8px; display: flex; flex-direction: column; gap: 4px; }
+        .upload-progress.hidden { display: none; }
+        .progress-file { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .progress-bar { height: 4px; background: var(--bg-tertiary); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 2px; transition: width 0.2s; }
+        .file-time { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -192,6 +198,10 @@
         </div>
 
         <div class="upload-count" id="upload-count"></div>
+        <div class="upload-progress hidden" id="upload-progress">
+            <div class="progress-file" id="progress-file"></div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
         <div class="search-bar">
             <input type="text" id="file-search" placeholder="Поиск файлов..." oninput="renderFiles()">
         </div>
@@ -201,6 +211,7 @@
                     <tr>
                         <th>Имя</th>
                         <th>Размер</th>
+                        <th>Изменён</th>
                         <th style="width: 60px;"></th>
                     </tr>
                 </thead>
@@ -484,7 +495,7 @@
             body.innerHTML = '';
 
             if (files.length === 0) {
-                body.innerHTML = '<tr><td colspan="3" class="empty-folder">Папка пуста</td></tr>';
+                body.innerHTML = '<tr><td colspan="4" class="empty-folder">Папка пуста</td></tr>';
                 return;
             }
 
@@ -498,7 +509,7 @@
             Array.from(subFolders).sort().forEach(folder => {
                 const tr = document.createElement('tr');
                 tr.className = 'folder-row';
-                tr.innerHTML = '<td><div class="file-name"><span class="file-icon">📂</span><span>' + escapeHtml(folder) + '/</span></div></td><td class="file-size">—</td><td></td>';
+                tr.innerHTML = '<td><div class="file-name"><span class="file-icon">📂</span><span>' + escapeHtml(folder) + '/</span></div></td><td class="file-size">—</td><td class="file-time">—</td><td></td>';
                 tr.style.cursor = 'pointer';
                 tr.onclick = () => selectFolder(currentFolder ? currentFolder + '/' + folder : folder);
                 body.appendChild(tr);
@@ -512,6 +523,7 @@
                 if (newFiles.has(file.path)) tr.className = 'row-new';
                 tr.innerHTML = '<td><div class="file-name"><span class="file-icon">📄</span><span>' + escapeHtml(relPath) + '</span></div></td>' +
                     '<td class="file-size">' + formatSize(file.size) + '</td>' +
+                    '<td class="file-time">' + timeAgo(file.updated_at) + '</td>' +
                     '<td><button class="btn-delete" onclick="deleteFile(\'' + escapeHtml(file.path) + '\')">×</button></td>';
                 body.appendChild(tr);
             });
@@ -558,6 +570,22 @@
             if (bytes < 1024) return bytes + ' B';
             if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
             return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function timeAgo(dateStr) {
+            if (!dateStr) return '—';
+            const now = Date.now();
+            const diff = now - new Date(dateStr).getTime();
+            const sec = Math.floor(diff / 1000);
+            if (sec < 60) return 'только что';
+            const min = Math.floor(sec / 60);
+            if (min < 60) return min + ' мин. назад';
+            const h = Math.floor(min / 60);
+            if (h < 24) return h + ' ч. назад';
+            const d = Math.floor(h / 24);
+            if (d < 30) return d + ' дн. назад';
+            const m = Math.floor(d / 30);
+            return m + ' мес. назад';
         }
 
         async function deleteFile(path) {
@@ -618,11 +646,18 @@
 
         async function handleFiles(files) {
             let ok = 0, fail = 0;
+            const total = files.length;
             const countEl = document.getElementById('upload-count');
+            const progressEl = document.getElementById('upload-progress');
+            const progressFile = document.getElementById('progress-file');
+            const progressFill = document.getElementById('progress-fill');
+            progressEl.classList.remove('hidden');
 
             for (const file of files) {
                 try {
                     const relPath = file.fullPath || (currentFolder ? currentFolder + '/' + file.name : file.name);
+                    progressFile.textContent = relPath;
+                    progressFill.style.width = ((ok + fail) / total * 100) + '%';
                     const content = await readFileAsBase64(file);
                     const hash = await calculateSHA256(file);
 
@@ -640,19 +675,22 @@
                     }
 
                     const respData = await resp.json().catch(() => ({}));
-                    const entry = { path: relPath, sha256: hash, size: file.size };
+                    const entry = { path: relPath, sha256: hash, size: file.size, updated_at: new Date().toISOString() };
                     if (respData.download_url) entry.download_base = respData.download_url;
                     manifest.files = manifest.files.filter(f => f.path !== relPath);
                     manifest.files.push(entry);
                     newFiles.add(relPath);
                     setTimeout(() => { newFiles.delete(relPath); renderFiles(); }, 18000);
                     ok++;
+                    progressFill.style.width = (ok / total * 100) + '%';
                 } catch (e) {
                     fail++;
                     console.error('Ошибка ' + file.name + ':', e);
+                    progressFill.style.width = ((ok + fail) / total * 100) + '%';
                 }
             }
 
+            progressEl.classList.add('hidden');
             try {
                 await saveManifest();
             } catch (e) {
