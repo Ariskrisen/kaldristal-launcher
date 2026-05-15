@@ -1,5 +1,5 @@
 {
   "version": "1.0.2",
-  "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.1/KalDristal.Launcher_1.0.1_x64-setup.exe",
-  "notes": "Test update: version bump to test auto-update mechanism"
+  "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.1/kaldristal-launcher-v1.0.2.exe",
+  "notes": "Fix: auto-update, standalone exe, no more installer required"
 }
