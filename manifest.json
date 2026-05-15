@@ -6017,6 +6017,13 @@
       "size": 13763
     },
     {
+      "path": "mods/everycomp-1.20-2.9.20-forge.jar",
+      "sha256": "6183dcb50cfed10b37d766a2cda409e31d9e9e9302acb3247f81d1ce08a8983d",
+      "size": 2844550,
+      "updated_at": "2026-05-15T10:24:35.165Z",
+      "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/mod-files/everycomp-1.20-2.9.20-forge.jar"
+    },
+    {
       "path": "mods/explosive-enhancement-1.2.2-1.20.x.jar",
       "sha256": "2a98b3f820b48c156e2495c28b994cf2835da172db852de6dd24bdef3b8de589",
       "size": 102550
