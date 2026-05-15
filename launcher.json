@@ -1,5 +1,5 @@
 {
   "version": "1.0.7",
   "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.7/kaldristal-launcher.exe",
-  "notes": "debug toast, skip shaderpacks/oculus"
+  "notes": "no console, robust batch, skip shaderpacks"
 }
