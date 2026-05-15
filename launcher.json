@@ -1,5 +1,5 @@
 {
-  "version": "1.0.6",
+  "version": "1.0.7",
   "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.6/kaldristal-launcher.exe",
-  "notes": "buttons at v1.0.0 height, update row display:none"
+  "notes": "skip shaderpacks, oculus.properties"
 }
