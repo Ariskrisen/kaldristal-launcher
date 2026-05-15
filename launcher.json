@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.1/KalDristal.Launcher_1.0.1_x64-setup.exe",
-  "notes": "Fix: launcher buttons not working, auto-update support, options.txt preserved, update details modal"
+  "notes": "Test update: version bump to test auto-update mechanism"
 }
