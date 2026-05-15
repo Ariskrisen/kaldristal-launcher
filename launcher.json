@@ -1,5 +1,5 @@
 {
   "version": "1.0.8",
-  "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.7/kaldristal-launcher.exe",
-  "notes": "test update from 1.0.7 to 1.0.8"
+  "url": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/v1.0.8/kaldristal-launcher.exe",
+  "notes": "4-клик по версии для принудительного обновления, таймаут 10с, красная ошибка лаунчера"
 }
