@@ -6907,6 +6907,13 @@
       "size": 54173
     },
     {
+      "path": "mods/Steam_Rails-1.7.2+forge-mc1.20.1.jar",
+      "sha256": "da82605f01a4a43ea0907467583704253c2e718392d44be1cd7b9761edcb0da1",
+      "size": 16819720,
+      "updated_at": "2026-05-15T10:24:06.940Z",
+      "download_base": "https://github.com/Ariskrisen/kaldristal-launcher/releases/download/mod-files/Steam_Rails-1.7.2%2Bforge-mc1.20.1.jar"
+    },
+    {
       "path": "mods/structure_gel-1.20.1-2.16.2.jar",
       "sha256": "1584a5aed31c0f63e53c29d53cf4e069cdabf358e785240cc500702dc5918e3e",
       "size": 966028
